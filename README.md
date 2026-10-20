@@ -11,7 +11,7 @@
 > - Simulation (CAE) Engineer moving into machine learning
 > - Data Scientist working with simulation or test data
 
-The questions come from three places: what AI-for-simulation companies ask for in their job descriptions, what candidates report from their interviews, and the core papers and courses of the field. Answers link either to a page in [`answers/`](answers/README.md), written for this guide and reused wherever the same concept comes up, or to the primary source: the paper, the documentation or a lecture.
+The questions come from three places: what AI-for-simulation companies ask for in their job descriptions, what candidates report from their interviews, and the core papers and courses of the field. Every answer links to a section of a page in [`answers/`](answers/README.md), written for this guide: a short answer you could give in the first thirty seconds, then the details, tested code where it helps, a model interview answer with likely follow-ups, and references to the primary sources (papers, documentation, lectures).
 
 ## What These Interviews Test
 
@@ -92,713 +92,728 @@ Also in this repository:
 Two overviews to start with: [Physics Informed Machine Learning: High Level Overview of AI and ML in Science and Engineering](https://www.youtube.com/watch?v=JoFW2uSd3Uo) (Steve Brunton) and [ETH Zürich AISE: Course Introduction](https://www.youtube.com/watch?v=LkKvhvsf6jY) (Ben Moseley).
 
 - What is a surrogate model, and why do engineering companies want one?
-  - Answer: [Surrogate models](answers/surrogate-models.md)
+  - Answer: [Surrogate Models](answers/surrogate-models.md)
 - When should you *not* replace a numerical solver with machine learning?
-  - Answer: [ML vs numerical solvers](answers/ml-vs-numerical-solvers.md) and [Weak baselines and reporting biases lead to overoptimism in machine learning for fluid-related PDEs](https://arxiv.org/abs/2407.07218)
+  - Answer: [When not to replace a solver with ML](answers/ml-vs-numerical-solvers.md#when-not-to-replace-a-solver-with-ml)
 - What is the difference between a PINN and a neural operator?
-  - Answer: [PINNs](answers/pinns.md) and [Neural operators](answers/neural-operators.md)
+  - Answer: [PINN vs neural operator](answers/neural-operators.md#pinn-vs-neural-operator)
 - Why are graph neural networks a natural fit for simulation meshes?
-  - Answer: [GNNs and MeshGraphNets](answers/gnns-and-meshgraphnets.md)
+  - Answer: [Why GNNs fit simulation meshes](answers/gnns-and-meshgraphnets.md#why-gnns-fit-simulation-meshes)
 - Walk me through a CAE workflow from CAD to report. Where can machine learning help, and where can it hurt?
-  - Answer: [Surrogate models](answers/surrogate-models.md) and [System design framework](answers/system-design-framework.md)
+  - Answer: [The CAE Workflow, and Where ML Fits](answers/cae-workflow.md)
 - What does "the model generalizes to new geometries" actually mean, and how would you test the claim?
-  - Answer: [Out-of-distribution detection and generalization](answers/out-of-distribution-and-generalization.md) and [Data splits and leakage](answers/data-splits-and-leakage.md)
+  - Answer: [What generalizing to new geometries means](answers/out-of-distribution-and-generalization.md#what-generalizing-to-new-geometries-means)
 - How do you know whether a surrogate's prediction can be trusted for one specific new design?
-  - Answer: [Uncertainty quantification](answers/uncertainty-quantification.md) and [Out-of-distribution detection and generalization](answers/out-of-distribution-and-generalization.md)
+  - Answer: [Trusting one prediction for one new design](answers/out-of-distribution-and-generalization.md#trusting-one-prediction-for-one-new-design)
 - A paper claims a 1000× speed-up over CFD. What questions would you ask?
-  - Answer: [Evaluation metrics](answers/evaluation-metrics.md) and [ML vs numerical solvers](answers/ml-vs-numerical-solvers.md)
+  - Answer: [Questions to ask about a 1000x speed-up claim](answers/ml-vs-numerical-solvers.md#questions-to-ask-about-a-1000x-speed-up-claim)
 - What is the difference between verification and validation?
-  - Answer: [Verification, validation and mesh convergence](answers/verification-validation-and-mesh-convergence.md)
+  - Answer: [Verification vs validation](answers/verification-validation-and-mesh-convergence.md#verification-vs-validation)
 - What is the difference between interpolation and extrapolation in a design space?
-  - Answer: [Out-of-distribution detection and generalization](answers/out-of-distribution-and-generalization.md)
+  - Answer: [Interpolation vs extrapolation](answers/out-of-distribution-and-generalization.md#interpolation-vs-extrapolation)
 
 ## Simulation Fundamentals: PDEs and Numerical Methods
 
 - What does it mean to "solve a PDE" numerically?
-  - Answer: Explained in this lecture: [ETH Zürich AISE: Introduction to Operator Learning Part 1](https://www.youtube.com/watch?v=yhHhMmiNl_g) (chapter "What does it mean to solve a PDE?") and [ETH Zürich AISE: Importance of PDEs in Science](https://www.youtube.com/watch?v=UiZxDRBd0Q8)
+  - Answer: [Solving a PDE Numerically](answers/solving-pdes-numerically.md)
 - Compare the finite element, finite volume and finite difference methods. Where is each used?
   - Answer: [FEM vs FVM vs FDM](answers/fem-vs-fvm-vs-fdm.md)
 - What is the weak form of a PDE, and why does FEM use it?
-  - Answer: [The finite element method](answers/finite-element-method.md) and [Weak formulation](https://en.wikipedia.org/wiki/Weak_formulation)
+  - Answer: [The weak form](answers/weak-form-and-galerkin.md#the-weak-form)
 - What is the Galerkin method?
-  - Answer: [The finite element method](answers/finite-element-method.md) and [Galerkin method](https://en.wikipedia.org/wiki/Galerkin_method)
+  - Answer: [The Galerkin method](answers/weak-form-and-galerkin.md#the-galerkin-method)
 - What are shape functions, and what is the difference between linear and quadratic elements?
-  - Answer: [The finite element method](answers/finite-element-method.md)
+  - Answer: [Shape functions](answers/elements-and-shape-functions.md#shape-functions)
 - How is the global stiffness matrix assembled, and why is it sparse?
-  - Answer: [The finite element method](answers/finite-element-method.md)
+  - Answer: [Assembly and sparsity](answers/finite-element-method.md#assembly-and-sparsity)
 - What are Dirichlet, Neumann and Robin boundary conditions? Give a physical example of each.
-  - Answer: [Boundary conditions](answers/boundary-conditions.md), [Dirichlet](https://en.wikipedia.org/wiki/Dirichlet_boundary_condition), [Neumann](https://en.wikipedia.org/wiki/Neumann_boundary_condition) and [Robin](https://en.wikipedia.org/wiki/Robin_boundary_condition)
+  - Answer: [Dirichlet, Neumann and Robin conditions](answers/boundary-conditions.md#dirichlet-neumann-and-robin-conditions)
 - Why are Dirichlet conditions called "essential" and Neumann conditions "natural" in FEM?
-  - Answer: [The finite element method](answers/finite-element-method.md)
+  - Answer: [Essential and natural boundary conditions](answers/weak-form-and-galerkin.md#essential-and-natural-boundary-conditions)
 - What is the CFL condition, and what happens if you violate it?
-  - Answer: [Courant–Friedrichs–Lewy condition](https://en.wikipedia.org/wiki/Courant%E2%80%93Friedrichs%E2%80%93Lewy_condition) and [FEM vs FVM vs FDM](answers/fem-vs-fvm-vs-fdm.md)
+  - Answer: [The CFL condition](answers/time-integration-and-stability.md#the-cfl-condition)
 - Explicit vs implicit time integration: what are the trade-offs?
-  - Answer: [Explicit and implicit methods](https://en.wikipedia.org/wiki/Explicit_and_implicit_methods) and [FEM vs FVM vs FDM](answers/fem-vs-fvm-vs-fdm.md)
+  - Answer: [Explicit vs implicit time integration](answers/time-integration-and-stability.md#explicit-vs-implicit-time-integration)
 - What is a stiff equation, and why does stiffness push you towards implicit methods?
-  - Answer: [Stiff equation](https://en.wikipedia.org/wiki/Stiff_equation)
+  - Answer: [Stiff equations](answers/time-integration-and-stability.md#stiff-equations)
 - How are large sparse linear systems solved? Compare direct solvers, conjugate gradient and multigrid.
-  - Answer: [Conjugate gradient method](https://en.wikipedia.org/wiki/Conjugate_gradient_method), [Multigrid method](https://en.wikipedia.org/wiki/Multigrid_method) and [FEM vs FVM vs FDM](answers/fem-vs-fvm-vs-fdm.md)
+  - Answer: [Sparse Linear Solvers](answers/sparse-linear-solvers.md)
 - How does Newton–Raphson solve a nonlinear problem, and what do you do when it does not converge?
-  - Answer: [Newton's method](https://en.wikipedia.org/wiki/Newton%27s_method) and [The finite element method](answers/finite-element-method.md)
+  - Answer: [Newton-Raphson and Nonlinear Solvers](answers/newton-raphson-and-nonlinear-solvers.md)
 - Can machine learning speed up a nonlinear solver *without* changing its answer?
-  - Answer: [Differentiable physics and hybrid solvers](answers/differentiable-physics-and-hybrid-solvers.md) and [Jin et al., neural hybrid Newton solvers](https://arxiv.org/abs/2407.03945)
+  - Answer: [Speeding up a solver with ML without changing its answer](answers/newton-raphson-and-nonlinear-solvers.md#speeding-up-a-solver-with-ml-without-changing-its-answer)
 - What is a mesh convergence study? What is the grid convergence index?
-  - Answer: [Verification, validation and mesh convergence](answers/verification-validation-and-mesh-convergence.md) and [Examining Spatial (Grid) Convergence (NASA)](https://www.grc.nasa.gov/www/wind/valid/tutorial/spatconv.html)
+  - Answer: [Mesh convergence and the grid convergence index](answers/verification-validation-and-mesh-convergence.md#mesh-convergence-and-the-grid-convergence-index)
 - What are the sources of error in a simulation result?
-  - Answer: [Verification, validation and mesh convergence](answers/verification-validation-and-mesh-convergence.md)
+  - Answer: [Sources of error in a simulation](answers/verification-validation-and-mesh-convergence.md#sources-of-error-in-a-simulation)
 - Structured vs unstructured meshes; tetrahedra vs hexahedra vs prisms. What is mesh quality?
-  - Answer: [Mesh data processing](answers/mesh-data-processing.md) and [Gmsh reference manual](https://gmsh.info/doc/texinfo/gmsh.html)
+  - Answer: [Meshing and Mesh Quality](answers/meshing-and-mesh-quality.md)
 - What is automatic differentiation, and how is it different from finite differences and symbolic differentiation?
-  - Answer: [Automatic differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation) and [PINNs](answers/pinns.md)
+  - Answer: [Automatic Differentiation](answers/automatic-differentiation.md)
 - Hands-on: work through a PDE tutorial yourself.
-  - Answer: [The FEniCSx tutorial](https://jsdokken.com/dolfinx-tutorial/) (FEM) and [CFD Python: 12 steps to Navier–Stokes](https://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/) (finite differences)
+  - Answer: [Hands-on: PDE tutorials](resources.md#hands-on-pde-tutorials)
 
 ## Structural Mechanics (FEA)
 
 - Explain stress, strain, Young's modulus and Poisson's ratio. What is linear elasticity?
-  - Answer: [Linear elasticity](https://en.wikipedia.org/wiki/Linear_elasticity)
+  - Answer: [Stress, Strain and Linear Elasticity](answers/stress-strain-and-linear-elasticity.md)
 - What is von Mises stress, and why is it used for ductile metals?
-  - Answer: [Von Mises yield criterion](https://en.wikipedia.org/wiki/Von_Mises_yield_criterion)
+  - Answer: [Von Mises Stress, Yield and Safety Factors](answers/von-mises-stress-and-yield.md)
 - What is a stress concentration? How is it different from a stress singularity?
-  - Answer: [Stress concentrations and singularities](answers/stress-concentrations-and-singularities.md) and [Stress concentration](https://en.wikipedia.org/wiki/Stress_concentration)
+  - Answer: [Stress concentration vs stress singularity](answers/stress-concentrations-and-singularities.md#stress-concentration-vs-stress-singularity)
 - Why does the peak stress at a sharp corner keep rising as you refine the mesh?
-  - Answer: [Stress concentrations and singularities](answers/stress-concentrations-and-singularities.md)
+  - Answer: [Why the peak stress rises with mesh refinement](answers/stress-concentrations-and-singularities.md#why-the-peak-stress-rises-with-mesh-refinement)
 - What is Saint-Venant's principle, and why does it matter when two models apply the same load differently?
-  - Answer: [Saint-Venant's principle](https://en.wikipedia.org/wiki/Saint-Venant%27s_principle) and [Stress concentrations and singularities](answers/stress-concentrations-and-singularities.md)
+  - Answer: [Saint-Venant's principle](answers/stress-concentrations-and-singularities.md#saint-venants-principle)
 - What makes an analysis nonlinear (material, geometry, contact)?
-  - Answer: [The finite element method](answers/finite-element-method.md) and [Plasticity](https://en.wikipedia.org/wiki/Plasticity_(physics))
+  - Answer: [Three sources of nonlinearity](answers/nonlinear-structural-analysis.md#three-sources-of-nonlinearity)
 - Why does plasticity make the solution depend on the load history, and why does that complicate a surrogate?
-  - Answer: [Plasticity](https://en.wikipedia.org/wiki/Plasticity_(physics)) and [Surrogate models](answers/surrogate-models.md)
+  - Answer: [Plasticity and load-history dependence](answers/nonlinear-structural-analysis.md#plasticity-and-load-history-dependence)
 - What is buckling, and why is a linear buckling analysis an eigenvalue problem?
-  - Answer: [Buckling](https://en.wikipedia.org/wiki/Buckling)
+  - Answer: [Buckling](answers/buckling.md)
 - What is modal analysis, and what are natural frequencies and mode shapes used for?
-  - Answer: [Modal analysis](https://en.wikipedia.org/wiki/Modal_analysis)
+  - Answer: [Modal Analysis](answers/modal-analysis.md)
 - What is fatigue, and why is fatigue life hard to predict with a surrogate?
-  - Answer: [Fatigue (material)](https://en.wikipedia.org/wiki/Fatigue_(material)) and [Stress concentrations and singularities](answers/stress-concentrations-and-singularities.md)
+  - Answer: [Fatigue](answers/fatigue.md)
 - Linear tetrahedral elements are "too stiff" in bending. Why, and what do you do about it?
-  - Answer: [The finite element method](answers/finite-element-method.md) (section on locking)
+  - Answer: [Why linear tetrahedra are too stiff in bending](answers/elements-and-shape-functions.md#why-linear-tetrahedra-are-too-stiff-in-bending)
 - How do you apply a bolt load or a remote load in FEA (rigid vs distributing couplings), and how does the choice affect nearby stresses?
-  - Answer: [Boundary conditions](answers/boundary-conditions.md) and [SimJEB: Simulated Jet Engine Bracket Dataset](https://arxiv.org/abs/2105.03534)
+  - Answer: [Bolt loads and remote loads](answers/boundary-conditions.md#bolt-loads-and-remote-loads)
 - What is a safety factor? How would you predict one with a surrogate, and what goes wrong?
-  - Answer: [Stress concentrations and singularities](answers/stress-concentrations-and-singularities.md) and [Uncertainty quantification](answers/uncertainty-quantification.md)
+  - Answer: [Predicting a safety factor with a surrogate](answers/von-mises-stress-and-yield.md#predicting-a-safety-factor-with-a-surrogate)
 - How do you check that an FEA result is sane before you trust it?
-  - Answer: [Verification, validation and mesh convergence](answers/verification-validation-and-mesh-convergence.md)
+  - Answer: [Sanity checks before trusting an FEA result](answers/verification-validation-and-mesh-convergence.md#sanity-checks-before-trusting-an-fea-result)
 - Why are crash-simulation surrogates especially hard?
-  - Answer: [High-Fidelity Industrial Crash Dynamics Prediction via Geometry-Aware Operator Learning](https://arxiv.org/abs/2605.27758) and [Autoregressive rollouts](answers/autoregressive-rollouts.md)
+  - Answer: [Why crash surrogates are hard](answers/crash-simulation-surrogates.md#why-crash-surrogates-are-hard)
 - Which public structural datasets could you train on?
-  - Answer: [SimJEB](https://simjeb.github.io/) and [DeepJEB](https://arxiv.org/abs/2406.09047); see also [Learning resources](resources.md#datasets-and-benchmarks)
+  - Answer: [Structural datasets](answers/public-simulation-datasets.md#structural-datasets)
 
 ## Fluid Dynamics (CFD)
 
 - Write down the incompressible Navier–Stokes equations and explain each term.
-  - Answer: [Navier–Stokes equations](https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_equations) and [CFD essentials](answers/cfd-essentials.md)
+  - Answer: [The incompressible Navier-Stokes equations](answers/cfd-essentials.md#the-incompressible-navier-stokes-equations)
 - What is the Reynolds number, and what happens physically as it increases?
-  - Answer: [Reynolds number](https://en.wikipedia.org/wiki/Reynolds_number) and [CFD essentials](answers/cfd-essentials.md)
+  - Answer: [The Reynolds number](answers/cfd-essentials.md#the-reynolds-number)
 - Laminar vs turbulent flow: why is turbulence so expensive to simulate?
-  - Answer: [CFD essentials](answers/cfd-essentials.md) and [Turbulence modeling](https://en.wikipedia.org/wiki/Turbulence_modeling)
+  - Answer: [Why turbulence is expensive to simulate](answers/turbulence-modelling.md#why-turbulence-is-expensive-to-simulate)
 - RANS vs LES vs DNS: compare cost, accuracy and typical use.
-  - Answer: [CFD essentials](answers/cfd-essentials.md), [RANS](https://en.wikipedia.org/wiki/Reynolds-averaged_Navier%E2%80%93Stokes_equations), [LES](https://en.wikipedia.org/wiki/Large_eddy_simulation) and [DNS](https://en.wikipedia.org/wiki/Direct_numerical_simulation)
+  - Answer: [RANS vs LES vs DNS](answers/turbulence-modelling.md#rans-vs-les-vs-dns)
 - What does a turbulence model such as Spalart–Allmaras or k-ω SST do?
-  - Answer: [CFD essentials](answers/cfd-essentials.md) and [NASA Turbulence Modeling Resource](https://turbmodels.larc.nasa.gov/)
+  - Answer: [What a turbulence model does](answers/turbulence-modelling.md#what-a-turbulence-model-does)
 - What is a boundary layer? What is y+, and why does it drive mesh design near walls?
-  - Answer: [CFD essentials](answers/cfd-essentials.md), [Boundary layer](https://en.wikipedia.org/wiki/Boundary_layer), [Law of the wall](https://en.wikipedia.org/wiki/Law_of_the_wall) and [Dimensionless wall distance (y plus)](https://www.cfd-online.com/Wiki/Dimensionless_wall_distance_(y_plus))
+  - Answer: [The boundary layer and y+](answers/boundary-layers-and-wall-treatment.md#the-boundary-layer-and-y)
 - What are wall functions, and when are they acceptable?
-  - Answer: [CFD essentials](answers/cfd-essentials.md)
+  - Answer: [Wall functions](answers/boundary-layers-and-wall-treatment.md#wall-functions)
 - Incompressible vs compressible flow: when do you need a compressible solver?
-  - Answer: [CFD essentials](answers/cfd-essentials.md)
+  - Answer: [Incompressible vs compressible flow](answers/cfd-essentials.md#incompressible-vs-compressible-flow)
 - What is flow separation, and why do surrogates struggle near it?
-  - Answer: [CFD essentials](answers/cfd-essentials.md) and [Out-of-distribution detection and generalization](answers/out-of-distribution-and-generalization.md)
+  - Answer: [Flow separation](answers/boundary-layers-and-wall-treatment.md#flow-separation)
 - What are the drag and lift coefficients, and how do you compute them from surface pressure and wall shear stress?
-  - Answer: [Drag coefficient](https://en.wikipedia.org/wiki/Drag_coefficient), [CFD essentials](answers/cfd-essentials.md) and [Mesh data processing](answers/mesh-data-processing.md)
+  - Answer: [Aerodynamic Forces and Coefficients](answers/aerodynamic-forces-and-coefficients.md)
 - Steady vs transient simulation: when is a steady RANS answer misleading?
-  - Answer: [CFD essentials](answers/cfd-essentials.md)
+  - Answer: [Steady vs transient simulation](answers/cfd-essentials.md#steady-vs-transient-simulation)
 - Which boundary conditions does an external-aerodynamics simulation use?
-  - Answer: [Boundary conditions](answers/boundary-conditions.md)
+  - Answer: [External-aerodynamics boundary conditions](answers/boundary-conditions.md#external-aerodynamics-boundary-conditions)
 - How does an incompressible solver couple pressure and velocity?
-  - Answer: [CFD essentials](answers/cfd-essentials.md)
+  - Answer: [Pressure-velocity coupling](answers/cfd-essentials.md#pressure-velocity-coupling)
 - What does a typical external-aerodynamics dataset contain, and what is usually missing?
-  - Answer: [DrivAerML: High-Fidelity CFD Dataset for Road-Car External Aerodynamics](https://arxiv.org/abs/2408.11969) and [AirfRANS](https://arxiv.org/abs/2212.07564)
+  - Answer: [What an external-aerodynamics dataset contains](answers/public-simulation-datasets.md#what-an-external-aerodynamics-dataset-contains)
 - Why does a divergence-free constraint matter, and how can a model enforce it exactly?
-  - Answer: [Hard vs soft constraints](answers/hard-vs-soft-constraints.md) and [AB-UPT](https://arxiv.org/abs/2502.09692)
+  - Answer: [Enforcing a divergence-free field exactly](answers/hard-vs-soft-constraints.md#enforcing-a-divergence-free-field-exactly)
 - Hands-on: which open-source CFD solvers would you use to generate data?
-  - Answer: [OpenFOAM](https://github.com/OpenFOAM/OpenFOAM-dev), [SU2](https://github.com/su2code/SU2) and [CFD Python: 12 steps to Navier–Stokes](https://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
+  - Answer: [Open-source solvers for generating data](answers/generating-simulation-training-data.md#open-source-solvers-for-generating-data)
 
 ## Heat Transfer and Multiphysics
 
 - Explain conduction, convection and radiation, and the boundary conditions used for each.
-  - Answer: [Thermal conduction](https://en.wikipedia.org/wiki/Thermal_conduction) and [Boundary conditions](answers/boundary-conditions.md)
+  - Answer: [Conduction, convection and radiation](answers/heat-transfer-basics.md#conduction-convection-and-radiation)
 - What is conjugate heat transfer?
-  - Answer: [CFD essentials](answers/cfd-essentials.md)
+  - Answer: [Conjugate heat transfer](answers/heat-transfer-basics.md#conjugate-heat-transfer)
 - What is thermo-mechanical coupling? Explain one-way vs two-way coupling.
-  - Answer: [The finite element method](answers/finite-element-method.md) (section on multiphysics)
+  - Answer: [One-way vs two-way coupling](answers/multiphysics-coupling.md#one-way-vs-two-way-coupling)
 - Why does a mismatch in thermal expansion cause warpage in layered parts such as electronics packages?
-  - Answer: [The finite element method](answers/finite-element-method.md) (section on multiphysics)
+  - Answer: [Thermal Stress and Warpage](answers/thermal-stress-and-warpage.md)
 - Which dimensionless numbers matter in heat transfer (Prandtl, Nusselt, Biot), and why would you feed them to a model?
-  - Answer: [Non-dimensionalization and normalization](answers/nondimensionalization-and-normalization.md)
+  - Answer: [Dimensionless numbers: Prandtl, Nusselt and Biot](answers/heat-transfer-basics.md#dimensionless-numbers-prandtl-nusselt-and-biot)
 - What is the difference between partitioned and monolithic coupling in fluid–structure interaction?
-  - Answer: [The finite element method](answers/finite-element-method.md) and [preCICE (coupling library)](https://github.com/precice/precice)
+  - Answer: [Partitioned vs monolithic coupling](answers/multiphysics-coupling.md#partitioned-vs-monolithic-coupling)
 - How would you build a surrogate for the thermal design of an electronics enclosure or a data-center room?
-  - Answer: [System design framework](answers/system-design-framework.md) and [NVIDIA PhysicsNeMo](https://github.com/NVIDIA/physicsnemo) (includes data-center airflow and thermal recipes)
+  - Answer: [Design: Thermal Surrogate](answers/design-thermal-surrogate.md)
 
 ## Machine Learning Fundamentals for Physical Data
 
 - How do you normalize physical fields and coordinates? Why per channel, and why only with training-set statistics?
-  - Answer: [Non-dimensionalization and normalization](answers/nondimensionalization-and-normalization.md)
+  - Answer: [Normalizing fields and coordinates](answers/nondimensionalization-and-normalization.md#normalizing-fields-and-coordinates)
 - Why non-dimensionalize inputs and outputs before training?
-  - Answer: [Non-dimensionalization and normalization](answers/nondimensionalization-and-normalization.md) and [Buckingham π theorem](https://en.wikipedia.org/wiki/Buckingham_%CF%80_theorem)
+  - Answer: [Why non-dimensionalize](answers/nondimensionalization-and-normalization.md#why-non-dimensionalize)
 - Your targets span several orders of magnitude across samples. MSE or relative L2 loss?
-  - Answer: [Evaluation metrics](answers/evaluation-metrics.md) and [Non-dimensionalization and normalization](answers/nondimensionalization-and-normalization.md)
+  - Answer: [MSE or relative L2 loss](answers/nondimensionalization-and-normalization.md#mse-or-relative-l2-loss)
 - How do you handle heavy-tailed targets such as peak stress or stagnation pressure?
-  - Answer: [Non-dimensionalization and normalization](answers/nondimensionalization-and-normalization.md)
+  - Answer: [Heavy-tailed targets](answers/nondimensionalization-and-normalization.md#heavy-tailed-targets)
 - How do you control overfitting when you only have 50–500 simulations?
-  - Answer: [Surrogate models](answers/surrogate-models.md) and [Gaussian processes](answers/gaussian-processes.md)
+  - Answer: [Controlling overfitting with 50 to 500 simulations](answers/learning-from-small-simulation-datasets.md#controlling-overfitting-with-50-to-500-simulations)
 - What is spectral bias, and why does it matter for physical fields?
-  - Answer: [PINN training failures](answers/pinn-training-failures.md), [On the Spectral Bias of Neural Networks](https://arxiv.org/abs/1806.08734) and [Fourier Features Let Networks Learn High Frequency Functions](https://arxiv.org/abs/2006.10739)
+  - Answer: [Spectral bias](answers/spectral-bias-and-fourier-features.md#spectral-bias)
 - What are Fourier features or positional encodings for coordinates, and when do you need them?
-  - Answer: [Transformers for physics](answers/transformers-for-physics.md) and [Fourier Features Let Networks Learn High Frequency Functions](https://arxiv.org/abs/2006.10739)
+  - Answer: [Fourier features and positional encodings](answers/spectral-bias-and-fourier-features.md#fourier-features-and-positional-encodings)
 - How do you choose between a U-Net on a grid, a GNN on the mesh, a point-cloud network and a transformer?
-  - Answer: [Geometry representations](answers/geometry-representations.md) and [GNNs and MeshGraphNets](answers/gnns-and-meshgraphnets.md)
+  - Answer: [Choosing an Architecture](answers/choosing-an-architecture.md)
 - What are invariance and equivariance? Which symmetries matter in engineering problems?
-  - Answer: [Equivariance and symmetry](answers/equivariance-and-symmetry.md)
+  - Answer: [Invariance and equivariance](answers/equivariance-and-symmetry.md#invariance-and-equivariance)
 - When is data augmentation (rotation, mirroring, scaling) physically valid, and when is it wrong?
-  - Answer: [Equivariance and symmetry](answers/equivariance-and-symmetry.md)
+  - Answer: [When data augmentation is physically valid](answers/equivariance-and-symmetry.md#when-data-augmentation-is-physically-valid)
 - How do you do model selection when you have very few simulations?
-  - Answer: [Data splits and leakage](answers/data-splits-and-leakage.md)
+  - Answer: [Model selection with very few simulations](answers/learning-from-small-simulation-datasets.md#model-selection-with-very-few-simulations)
 - What does the universal approximation theorem guarantee, and what does it not?
-  - Answer: [Universal approximation theorem](https://en.wikipedia.org/wiki/Universal_approximation_theorem) and [DeepONet](answers/deeponet.md)
+  - Answer: [The Universal Approximation Theorem](answers/universal-approximation.md)
 - Explain backpropagation. Implement logistic regression from scratch.
-  - Answer: [Machine Learning Interviews Book (Chip Huyen)](https://huyenchip.com/ml-interviews-book/), [Machine-Learning-Interviews](https://github.com/alirezadir/Machine-Learning-Interviews) and [PhysicsX ML Engineer interview guide (InterviewQuery)](https://www.interviewquery.com/interview-guides/physicsx-ml-engineer)
+  - Answer: [Backpropagation and Logistic Regression from Scratch](answers/backpropagation-and-logistic-regression.md)
 - Why might you switch from Adam to L-BFGS late in training a physics model?
-  - Answer: [PINN training failures](answers/pinn-training-failures.md)
+  - Answer: [Adam then L-BFGS](answers/optimizers-for-physics-models.md#adam-then-l-bfgs)
 - Your model will not converge on a physical dataset. How do you debug it?
-  - Answer: [Non-dimensionalization and normalization](answers/nondimensionalization-and-normalization.md) (debugging checklist) and [PINN training failures](answers/pinn-training-failures.md)
+  - Answer: [Debugging Training on Physical Data](answers/debugging-training-on-physical-data.md)
 
 ## Physics-Informed Neural Networks (PINNs)
 
 - What is a PINN? Write down its loss function.
-  - Answer: [PINNs](answers/pinns.md), [So, what is a physics-informed neural network? (Ben Moseley)](https://benmoseley.blog/my-research/so-what-is-a-physics-informed-neural-network/) and [Physics Informed Deep Learning (Part I) (Raissi et al.)](https://arxiv.org/abs/1711.10561)
+  - Answer: [The PINN loss function](answers/pinns.md#the-pinn-loss-function)
 - How are the derivatives in the PDE residual computed?
-  - Answer: [PINNs](answers/pinns.md) and [Automatic differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation)
+  - Answer: [Derivatives in the PDE residual](answers/pinns.md#derivatives-in-the-pde-residual)
 - How do PINNs solve inverse problems, such as recovering a material parameter from sparse measurements?
-  - Answer: [PINNs](answers/pinns.md), [Physics Informed Deep Learning (Part II)](https://arxiv.org/abs/1711.10566) and [DeepXDE documentation](https://deepxde.readthedocs.io/)
+  - Answer: [Inverse problems with PINNs](answers/pinns.md#inverse-problems-with-pinns)
 - What are collocation points, and how should you choose them?
-  - Answer: [PINNs](answers/pinns.md)
+  - Answer: [Collocation points](answers/pinns.md#collocation-points)
 - Why do PINNs often fail to train?
-  - Answer: [PINN training failures](answers/pinn-training-failures.md) and [Characterizing possible failure modes in PINNs](https://arxiv.org/abs/2109.01050)
+  - Answer: [Why PINNs fail to train](answers/pinn-training-failures.md#why-pinns-fail-to-train)
 - What is loss imbalance, and how do adaptive loss weights work?
-  - Answer: [PINN training failures](answers/pinn-training-failures.md), [Understanding and mitigating gradient pathologies in PINNs](https://arxiv.org/abs/2001.04536) and [When and why PINNs fail to train: an NTK perspective](https://arxiv.org/abs/2007.14527)
+  - Answer: [Loss imbalance and adaptive weights](answers/pinn-training-failures.md#loss-imbalance-and-adaptive-weights)
 - What is the causality problem in time-dependent PINNs?
-  - Answer: [Respecting causality is all you need for training PINNs](https://arxiv.org/abs/2203.07404)
+  - Answer: [Causality in time-dependent PINNs](answers/pinn-training-failures.md#causality-in-time-dependent-pinns)
 - Soft vs hard enforcement of boundary conditions: trade-offs?
-  - Answer: [Hard vs soft constraints](answers/hard-vs-soft-constraints.md) and [PINNs with hard constraints for inverse design](https://arxiv.org/abs/2102.04626)
+  - Answer: [Soft vs hard boundary conditions in PINNs](answers/hard-vs-soft-constraints.md#soft-vs-hard-boundary-conditions-in-pinns)
 - When does a PINN beat a classical solver, and when does it lose?
-  - Answer: [PINNs](answers/pinns.md), [ML vs numerical solvers](answers/ml-vs-numerical-solvers.md) and [ETH Zürich AISE: PINNs – Limitations and Extensions Part 1](https://www.youtube.com/watch?v=S11QK8baGVI)
+  - Answer: [When a PINN beats a classical solver and when it loses](answers/pinns.md#when-a-pinn-beats-a-classical-solver-and-when-it-loses)
 - How do PINNs cope with high-frequency or multi-scale solutions?
-  - Answer: [PINN training failures](answers/pinn-training-failures.md) and [Finite Basis PINNs (FBPINNs)](https://arxiv.org/abs/2107.07871)
+  - Answer: [High-frequency and multi-scale solutions](answers/pinn-training-failures.md#high-frequency-and-multi-scale-solutions)
 - What does a good PINN training recipe look like in practice?
-  - Answer: [An Expert's Guide to Training PINNs](https://arxiv.org/abs/2308.08468) and its code, [jaxpi](https://github.com/PredictiveIntelligenceLab/jaxpi)
+  - Answer: [A PINN Training Recipe](answers/pinn-training-recipe.md)
 - Why does a PINN usually have to be retrained for each new geometry or boundary condition, and why does that matter commercially?
-  - Answer: [PINNs](answers/pinns.md) and [Neural operators](answers/neural-operators.md)
+  - Answer: [Why a PINN is retrained for every new problem](answers/pinns.md#why-a-pinn-is-retrained-for-every-new-problem)
 - What is a physics-informed neural operator (PINO)?
-  - Answer: [Physics-Informed Neural Operator for Learning PDEs](https://arxiv.org/abs/2111.03794)
+  - Answer: [Physics-Informed Neural Operator (PINO)](answers/physics-informed-neural-operator.md)
 - Where can I see PINNs taught properly from scratch?
-  - Answer: [ETH Zürich AISE: PINNs – Introduction](https://www.youtube.com/watch?v=D-F7BYRhAkQ), [Physics Informed Neural Networks (PINNs) (Steve Brunton)](https://www.youtube.com/watch?v=-zrY7P2dVC4) and the review [Scientific Machine Learning through PINNs: Where we are and What's next](https://arxiv.org/abs/2201.05624)
+  - Answer: [Hands-on: PINNs from scratch](resources.md#hands-on-pinns-from-scratch)
 
 ## Neural Operators
 
 - What is operator learning, and how is it different from ordinary supervised learning?
-  - Answer: [Neural operators](answers/neural-operators.md), [ETH Zürich AISE: Introduction to Operator Learning Part 1](https://www.youtube.com/watch?v=yhHhMmiNl_g) and [Part 2](https://www.youtube.com/watch?v=lEUgPvDi5O8)
+  - Answer: [What operator learning is](answers/neural-operators.md#what-operator-learning-is)
 - What does "discretization invariance" mean? Does it hold in practice?
-  - Answer: [Neural operators](answers/neural-operators.md) and [Neural Operator: Learning Maps Between Function Spaces (Kovachki et al.)](https://arxiv.org/abs/2108.08481)
+  - Answer: [Discretization invariance](answers/neural-operators.md#discretization-invariance)
 - Explain the Fourier Neural Operator architecture.
-  - Answer: [Fourier Neural Operator](answers/fourier-neural-operator.md), [FNO paper (Li et al.)](https://arxiv.org/abs/2010.08895), [Zongyi Li's FNO blog](https://zongyi-li.github.io/blog/2020/fourier-pde/) and [ETH Zürich AISE: Fourier Neural Operators](https://www.youtube.com/watch?v=b96wRdjH1Lg)
+  - Answer: [Architecture](answers/fourier-neural-operator.md#architecture)
 - Why does FNO keep only a limited number of Fourier modes?
-  - Answer: [Fourier Neural Operator](answers/fourier-neural-operator.md)
+  - Answer: [Why FNO keeps only a few Fourier modes](answers/fourier-neural-operator.md#why-fno-keeps-only-a-few-fourier-modes)
 - What are FNO's limitations (uniform grids, periodicity, complex geometry), and how do Geo-FNO and GINO address them?
-  - Answer: [Fourier Neural Operator](answers/fourier-neural-operator.md), [Geo-FNO](https://arxiv.org/abs/2207.05209) and [GINO](https://arxiv.org/abs/2309.00583)
+  - Answer: [Limitations, Geo-FNO and GINO](answers/fourier-neural-operator.md#limitations-geo-fno-and-gino)
 - Explain DeepONet: what do the branch and trunk networks do?
-  - Answer: [DeepONet](answers/deeponet.md), [DeepONet paper (Lu et al.)](https://arxiv.org/abs/1910.03193) and [ETH Zürich AISE: Spectral Neural Operators and Deep Operator Networks](https://www.youtube.com/watch?v=BxklDO0TMlA)
+  - Answer: [Branch and trunk networks](answers/deeponet.md#branch-and-trunk-networks)
 - DeepONet vs FNO: when would you choose each?
-  - Answer: [DeepONet](answers/deeponet.md) and [A comprehensive and fair comparison of two neural operators](https://arxiv.org/abs/2111.05512)
+  - Answer: [DeepONet vs FNO](answers/deeponet.md#deeponet-vs-fno)
 - What is a graph neural operator?
-  - Answer: [Neural Operator: Graph Kernel Network](https://arxiv.org/abs/2003.03485) and [Neural operators](answers/neural-operators.md)
+  - Answer: [Graph neural operators](answers/neural-operators.md#graph-neural-operators)
 - What is a convolutional neural operator (CNO)?
-  - Answer: [Convolutional Neural Operators](https://arxiv.org/abs/2302.01178) and [ETH Zürich AISE: Convolutional Neural Operators](https://www.youtube.com/watch?v=5XaLKR08TwI)
+  - Answer: [Convolutional neural operators](answers/neural-operators.md#convolutional-neural-operators)
 - How do neural operators handle time-dependent problems?
-  - Answer: [Autoregressive rollouts](answers/autoregressive-rollouts.md) and [ETH Zürich AISE: Time-Dependent Neural Operators](https://www.youtube.com/watch?v=u1KFcAvjyCI)
+  - Answer: [Neural operators for time-dependent problems](answers/neural-operators.md#neural-operators-for-time-dependent-problems)
 - Is attention a neural operator?
-  - Answer: [ETH Zürich AISE: Attention as a Neural Operator](https://www.youtube.com/watch?v=wJSgLRiU7D4), [Choose a Transformer: Fourier or Galerkin](https://arxiv.org/abs/2105.14995) and [Transformers for physics](answers/transformers-for-physics.md)
+  - Answer: [Is attention a neural operator?](answers/transformers-for-physics.md#is-attention-a-neural-operator)
 - How much training data does a neural operator need, and where does it come from?
-  - Answer: [Neural operators](answers/neural-operators.md) and [Design of experiments and active learning](answers/design-of-experiments-and-active-learning.md)
+  - Answer: [How much data a neural operator needs](answers/neural-operators.md#how-much-data-a-neural-operator-needs)
 - Which benchmark problems are standard for neural operators?
-  - Answer: [FNO paper](https://arxiv.org/abs/2010.08895) (Burgers, Darcy flow, Navier–Stokes), [PDEBench](https://arxiv.org/abs/2210.07182) and [Neural-Solver-Library](https://github.com/thuml/Neural-Solver-Library)
+  - Answer: [Standard benchmark problems for neural operators](answers/public-simulation-datasets.md#standard-benchmark-problems-for-neural-operators)
 - Where can I learn neural operators hands-on?
-  - Answer: [From Theory to Application: A Practical Introduction to Neural Operators](https://arxiv.org/abs/2503.05598) and the [neuraloperator library](https://neuraloperator.github.io/dev/index.html)
+  - Answer: [Hands-on: neural operators](resources.md#hands-on-neural-operators)
 
 ## Graph Neural Networks and Mesh-Based Learning
 
 - What is message passing? Write the update equations.
-  - Answer: [GNNs and MeshGraphNets](answers/gnns-and-meshgraphnets.md), [A Gentle Introduction to Graph Neural Networks (Distill)](https://distill.pub/2021/gnn-intro/) and [Neural Message Passing for Quantum Chemistry](https://arxiv.org/abs/1704.01212)
+  - Answer: [Message passing](answers/gnns-and-meshgraphnets.md#message-passing)
 - What is the graph-network framework (edge, node and global updates)?
-  - Answer: [Relational inductive biases, deep learning, and graph networks](https://arxiv.org/abs/1806.01261)
+  - Answer: [The graph-network framework](answers/gnns-and-meshgraphnets.md#the-graph-network-framework)
 - Explain MeshGraphNets: encoder, processor, decoder; mesh edges vs world edges.
-  - Answer: [GNNs and MeshGraphNets](answers/gnns-and-meshgraphnets.md), [Learning Mesh-Based Simulation with Graph Networks](https://arxiv.org/abs/2010.03409) and [DeepMind's MeshGraphNets code](https://github.com/google-deepmind/deepmind-research/tree/master/meshgraphnets)
+  - Answer: [MeshGraphNets: encoder, processor, decoder](answers/gnns-and-meshgraphnets.md#meshgraphnets-encoder-processor-decoder)
 - Which features go on the nodes and edges of a physics GNN, and why use relative positions?
-  - Answer: [GNNs and MeshGraphNets](answers/gnns-and-meshgraphnets.md) and [Equivariance and symmetry](answers/equivariance-and-symmetry.md)
+  - Answer: [Node and edge features](answers/gnns-and-meshgraphnets.md#node-and-edge-features)
 - How does the Graph Network-based Simulator (GNS) model particle systems?
-  - Answer: [Learning to Simulate Complex Physics with Graph Networks](https://arxiv.org/abs/2002.09405) and [its code](https://github.com/google-deepmind/deepmind-research/tree/master/learning_to_simulate)
+  - Answer: [The Graph Network-based Simulator (GNS)](answers/graph-network-simulator-gns.md)
 - How many message-passing steps do you need, and how does that relate to how far information must travel across the mesh?
-  - Answer: [GNNs and MeshGraphNets](answers/gnns-and-meshgraphnets.md)
+  - Answer: [How many message-passing steps](answers/gnns-and-meshgraphnets.md#how-many-message-passing-steps)
 - What are oversmoothing and oversquashing? How do multiscale GNNs help?
-  - Answer: [Deeper Insights into GCNs](https://arxiv.org/abs/1801.07606), [On the Bottleneck of GNNs](https://arxiv.org/abs/2006.05205), [MultiScale MeshGraphNets](https://arxiv.org/abs/2210.00612) and [X-MeshGraphNet](https://arxiv.org/abs/2411.17164)
+  - Answer: [Oversmoothing and oversquashing](answers/multiscale-gnns.md#oversmoothing-and-oversquashing)
 - How do you build a graph from a point cloud: k-nearest neighbors or a radius graph?
-  - Answer: [Mesh data processing](answers/mesh-data-processing.md), [k-d tree](https://en.wikipedia.org/wiki/K-d_tree) and [PyG documentation](https://pytorch-geometric.readthedocs.io/)
+  - Answer: [k-nearest-neighbour and radius graphs](answers/mesh-data-processing.md#k-nearest-neighbour-and-radius-graphs)
 - GCN vs GAT vs GraphSAGE vs GIN: what are the differences?
-  - Answer: [GCN](https://arxiv.org/abs/1609.02907), [GAT](https://arxiv.org/abs/1710.10903), [GraphSAGE](https://arxiv.org/abs/1706.02216) and [GIN: How Powerful are GNNs?](https://arxiv.org/abs/1810.00826)
+  - Answer: [GNN Layer Types: GCN, GAT, GraphSAGE and GIN](answers/gnn-layer-types.md)
 - How would you scale a GNN to a mesh with 10 million nodes?
-  - Answer: [Scaling to large meshes](answers/scaling-to-large-meshes.md) and [X-MeshGraphNet](https://arxiv.org/abs/2411.17164)
+  - Answer: [Scaling a GNN to 10 million nodes](answers/scaling-to-large-meshes.md#scaling-a-gnn-to-10-million-nodes)
 - What did "Message Passing Neural PDE Solvers" add to earlier GNN simulators?
-  - Answer: [Message Passing Neural PDE Solvers](https://arxiv.org/abs/2202.03376) and [Autoregressive rollouts](answers/autoregressive-rollouts.md)
+  - Answer: [Message Passing Neural PDE Solvers](answers/autoregressive-rollouts.md#message-passing-neural-pde-solvers)
 - When do you need an equivariant GNN?
-  - Answer: [E(n) Equivariant Graph Neural Networks](https://arxiv.org/abs/2102.09844) and [Equivariance and symmetry](answers/equivariance-and-symmetry.md)
+  - Answer: [When you need an equivariant GNN](answers/equivariance-and-symmetry.md#when-you-need-an-equivariant-gnn)
 - What is a Graph U-Net?
-  - Answer: [Graph U-Nets](https://arxiv.org/abs/1905.05178)
+  - Answer: [Graph U-Net](answers/multiscale-gnns.md#graph-u-net)
 - Which libraries would you use?
-  - Answer: [PyG](https://github.com/pyg-team/pytorch_geometric), [DGL](https://github.com/dmlc/dgl) and [NVIDIA PhysicsNeMo](https://github.com/NVIDIA/physicsnemo)
+  - Answer: [Libraries](resources.md#libraries)
 
 ## 3D Geometry and Geometric Deep Learning
 
 - What are the ways to represent 3D geometry for machine learning (mesh, point cloud, voxels, SDF, CAD parameters, B-rep)? Pros and cons of each?
-  - Answer: [Geometry representations](answers/geometry-representations.md)
+  - Answer: [Ways to represent 3D geometry](answers/geometry-representations.md#ways-to-represent-3d-geometry)
 - What is a signed distance function, and why do so many surrogates take it as input?
-  - Answer: [Signed distance function](https://en.wikipedia.org/wiki/Signed_distance_function), [Geometry representations](answers/geometry-representations.md) and [GINO](https://arxiv.org/abs/2309.00583)
+  - Answer: [Signed distance functions](answers/geometry-representations.md#signed-distance-functions)
 - Explain PointNet. Why does max pooling make it permutation-invariant?
-  - Answer: [Point-cloud learning](answers/point-cloud-learning.md) and [PointNet](https://arxiv.org/abs/1612.00593)
+  - Answer: [PointNet](answers/point-cloud-learning.md#pointnet)
 - What did PointNet++ add?
-  - Answer: [Point-cloud learning](answers/point-cloud-learning.md) and [PointNet++](https://arxiv.org/abs/1706.02413)
+  - Answer: [PointNet++](answers/point-cloud-learning.md#pointnet)
 - What is EdgeConv (DGCNN), and what is a Point Transformer?
-  - Answer: [Dynamic Graph CNN](https://arxiv.org/abs/1801.07829) and [Point Transformer](https://arxiv.org/abs/2012.09164)
+  - Answer: [DGCNN (EdgeConv) and Point Transformer](answers/point-cloud-learning.md#dgcnn-edgeconv-and-point-transformer)
 - How do you sample points from a surface mesh? What is farthest point sampling?
-  - Answer: [Point-cloud learning](answers/point-cloud-learning.md) and [Mesh data processing](answers/mesh-data-processing.md)
+  - Answer: [Sampling points from a surface mesh](answers/point-cloud-learning.md#sampling-points-from-a-surface-mesh)
 - How do you batch geometries that have very different numbers of points?
-  - Answer: [Point-cloud learning](answers/point-cloud-learning.md)
+  - Answer: [Batching geometries with different point counts](answers/point-cloud-learning.md#batching-geometries-with-different-point-counts)
 - How do you represent a CAD model for machine learning? Which public CAD datasets exist?
-  - Answer: [Geometry representations](answers/geometry-representations.md), [ABC dataset](https://arxiv.org/abs/1812.06216), [Fusion 360 Gallery](https://arxiv.org/abs/2010.02392) and [DeepCAD](https://arxiv.org/abs/2105.09492)
+  - Answer: [CAD models and CAD datasets](answers/geometry-representations.md#cad-models-and-cad-datasets)
 - What is an implicit neural representation or neural field?
-  - Answer: [DeepSDF](https://arxiv.org/abs/1901.05103), [SIREN](https://arxiv.org/abs/2006.09661) and [Geometry representations](answers/geometry-representations.md)
+  - Answer: [Neural fields](answers/geometry-representations.md#neural-fields)
 - Why can remeshing the same geometry change a model's prediction, and how do you test for it?
-  - Answer: [Geometry representations](answers/geometry-representations.md) and [Out-of-distribution detection and generalization](answers/out-of-distribution-and-generalization.md)
+  - Answer: [Why remeshing can change a prediction](answers/geometry-representations.md#why-remeshing-can-change-a-prediction)
 - How would you predict surface pressure on a car from its STL file?
-  - Answer: [System design framework](answers/system-design-framework.md), [Point-cloud learning](answers/point-cloud-learning.md) and [DrivAerNet++](https://arxiv.org/abs/2406.09624)
+  - Answer: [Worked example: surface pressure on a car from an STL](answers/geometry-representations.md#worked-example-surface-pressure-on-a-car-from-an-stl)
 - What is geodesic convolution, and how was it used for shape optimization?
-  - Answer: [Geodesic Convolutional Shape Optimization](https://arxiv.org/abs/1802.04016) (by the founders of Neural Concept)
+  - Answer: [Geodesic Convolutions and Shape Optimization](answers/geodesic-convolutions-and-shape-optimization.md)
 - Should you align shapes to a canonical orientation before training?
-  - Answer: [Equivariance and symmetry](answers/equivariance-and-symmetry.md)
+  - Answer: [Canonical orientation or not](answers/equivariance-and-symmetry.md#canonical-orientation-or-not)
 
 ## Transformers for Physics and Large-Scale Surrogates
 
 - Why is vanilla self-attention hard to use on a mesh with a million points?
-  - Answer: [Transformers for physics](answers/transformers-for-physics.md) and [FlashAttention](https://arxiv.org/abs/2205.14135)
+  - Answer: [Why vanilla attention fails on a million points](answers/transformers-for-physics.md#why-vanilla-attention-fails-on-a-million-points)
 - How does Transolver's Physics-Attention work?
-  - Answer: [Transolver](https://arxiv.org/abs/2402.02366), [Transolver++](https://arxiv.org/abs/2502.02414) and [Transformers for physics](answers/transformers-for-physics.md)
+  - Answer: [Transolver and Physics-Attention](answers/physics-transformer-architectures.md#transolver-and-physics-attention)
 - What are Universal Physics Transformers, and why encode a mesh into a fixed set of latent tokens?
-  - Answer: [Universal Physics Transformers](https://arxiv.org/abs/2402.12365), [UPT code](https://github.com/ml-jku/UPT) and [Transformers for physics](answers/transformers-for-physics.md)
+  - Answer: [Universal Physics Transformers](answers/physics-transformer-architectures.md#universal-physics-transformers)
 - What are AB-UPT's anchor tokens, and how does AB-UPT enforce a divergence-free field?
-  - Answer: [AB-UPT](https://arxiv.org/abs/2502.09692), [AB-UPT for Automotive and Aerospace Applications](https://arxiv.org/abs/2510.15808) and [Hard vs soft constraints](answers/hard-vs-soft-constraints.md)
+  - Answer: [AB-UPT: anchor tokens and divergence-free fields](answers/physics-transformer-architectures.md#ab-upt-anchor-tokens-and-divergence-free-fields)
 - What is DoMINO, and what is GeoTransolver?
-  - Answer: [DoMINO](https://arxiv.org/abs/2501.13350), [GeoTransolver](https://arxiv.org/abs/2512.20399) and [PhysicsNeMo: Transformer models for external aerodynamics](https://docs.nvidia.com/physicsnemo/latest/physicsnemo/examples/cfd/external_aerodynamics/transformer_models/README.html)
+  - Answer: [DoMINO](answers/physics-transformer-architectures.md#domino)
 - What is linear (Galerkin-type) attention, and how is it used in operator learning?
-  - Answer: [Choose a Transformer: Fourier or Galerkin](https://arxiv.org/abs/2105.14995), [OFormer: Transformer for PDEs' Operator Learning](https://arxiv.org/abs/2205.13671) and [GNOT](https://arxiv.org/abs/2302.14376)
+  - Answer: [Linear and Galerkin-type attention](answers/transformers-for-physics.md#linear-and-galerkin-type-attention)
 - How do you encode positions and boundary conditions as transformer inputs?
-  - Answer: [Transformers for physics](answers/transformers-for-physics.md)
+  - Answer: [Encoding positions and boundary conditions](answers/transformers-for-physics.md#encoding-positions-and-boundary-conditions)
 - Why do recent car-aerodynamics models use separate surface and volume branches?
-  - Answer: [AB-UPT](https://arxiv.org/abs/2502.09692) and [Transformers for physics](answers/transformers-for-physics.md)
+  - Answer: [Separate surface and volume branches](answers/physics-transformer-architectures.md#separate-surface-and-volume-branches)
 - Do scaling laws hold for neural surrogates? Is a bigger model always better?
-  - Answer: [ETH Zürich AISE: Windowed Attention and Scaling Laws](https://www.youtube.com/watch?v=YtJhReM5bHY) and [Towards Foundation Models for Scientific Machine Learning: Characterizing Scaling and Transfer Behavior](https://arxiv.org/abs/2306.00258)
+  - Answer: [Do scaling laws hold for neural surrogates?](answers/transformers-for-physics.md#do-scaling-laws-hold-for-neural-surrogates)
 - When would a GNN beat a transformer on a mesh problem, and vice versa?
-  - Answer: [Transformers for physics](answers/transformers-for-physics.md) and [GNNs and MeshGraphNets](answers/gnns-and-meshgraphnets.md)
+  - Answer: [GNN or transformer?](answers/transformers-for-physics.md#gnn-or-transformer)
 - Which open code bases implement these models?
-  - Answer: [Neural-Solver-Library](https://github.com/thuml/Neural-Solver-Library), [Transolver](https://github.com/thuml/Transolver), [UPT](https://github.com/ml-jku/UPT), [Noether (Emmi AI)](https://github.com/Emmi-AI/noether) and [NVIDIA PhysicsNeMo](https://github.com/NVIDIA/physicsnemo)
+  - Answer: [Open code bases for physics models](resources.md#open-code-bases-for-physics-models)
 
 ## Surrogate Models, Reduced-Order Models and Design of Experiments
 
 - Scalar surrogate (one number, such as drag) vs field surrogate (the whole pressure field): when do you need each?
-  - Answer: [Surrogate models](answers/surrogate-models.md)
+  - Answer: [Scalar vs field surrogates](answers/surrogate-models.md#scalar-vs-field-surrogates)
 - When are classical surrogates (polynomial response surfaces, radial basis functions, Kriging) enough?
-  - Answer: [Gaussian processes](answers/gaussian-processes.md), [Kriging](https://en.wikipedia.org/wiki/Kriging) and [Surrogate Modeling Toolbox (SMT)](https://github.com/SMTorg/smt)
+  - Answer: [Classical Surrogates: Response Surfaces, RBF Interpolation and Kriging](answers/classical-surrogates.md)
 - Explain Gaussian process regression. How does a GP estimate its own uncertainty?
-  - Answer: [Gaussian processes](answers/gaussian-processes.md), [A Visual Exploration of Gaussian Processes (Distill)](https://distill.pub/2019/visual-exploration-gaussian-processes/) and [Gaussian Processes for Machine Learning (Rasmussen & Williams)](https://gaussianprocess.org/gpml/)
+  - Answer: [Gaussian process regression](answers/gaussian-processes.md#gaussian-process-regression)
 - Which kernel would you choose, and how are the hyperparameters fitted?
-  - Answer: [Gaussian processes](answers/gaussian-processes.md)
+  - Answer: [Choosing a kernel and fitting hyperparameters](answers/gaussian-processes.md#choosing-a-kernel-and-fitting-hyperparameters)
 - Why do GPs scale badly with the number of samples, and what are the workarounds?
-  - Answer: [Gaussian processes](answers/gaussian-processes.md) and [GPyTorch](https://github.com/cornellius-gp/gpytorch)
+  - Answer: [Why GPs scale badly, and the workarounds](answers/gaussian-processes.md#why-gps-scale-badly-and-the-workarounds)
 - What is proper orthogonal decomposition (POD), and how do you compute it from snapshots?
-  - Answer: [Reduced-order models](answers/reduced-order-models.md), [Proper orthogonal decomposition](https://en.wikipedia.org/wiki/Proper_orthogonal_decomposition) and [Modal Analysis of Fluid Flows: An Overview](https://arxiv.org/abs/1702.01453)
+  - Answer: [Proper orthogonal decomposition](answers/reduced-order-models.md#proper-orthogonal-decomposition)
 - Intrusive (Galerkin-projection) vs non-intrusive reduced-order models: what is the difference?
-  - Answer: [Reduced-order models](answers/reduced-order-models.md)
+  - Answer: [Intrusive vs non-intrusive ROMs](answers/reduced-order-models.md#intrusive-vs-non-intrusive-roms)
 - What is dynamic mode decomposition (DMD)?
-  - Answer: [Dynamic mode decomposition](https://en.wikipedia.org/wiki/Dynamic_mode_decomposition) and [Reduced-order models](answers/reduced-order-models.md)
+  - Answer: [Dynamic mode decomposition](answers/reduced-order-models.md#dynamic-mode-decomposition)
 - When does a linear subspace fail, and what do autoencoder-based ROMs offer instead?
-  - Answer: [Reduced-order models](answers/reduced-order-models.md) and [Model reduction on nonlinear manifolds using deep convolutional autoencoders](https://arxiv.org/abs/1812.08373)
+  - Answer: [When a linear subspace fails](answers/reduced-order-models.md#when-a-linear-subspace-fails)
 - What is SINDy?
-  - Answer: [Sparse identification of nonlinear dynamics (SINDy)](https://arxiv.org/abs/1509.03580) and [PySINDy](https://github.com/dynamicslab/pysindy)
+  - Answer: [SINDy](answers/sindy-and-koopman.md#sindy)
 - What is the Koopman operator, and how is deep learning used to approximate it?
-  - Answer: [Deep learning for universal linear embeddings of nonlinear dynamics](https://arxiv.org/abs/1712.09707)
+  - Answer: [The Koopman operator](answers/sindy-and-koopman.md#the-koopman-operator)
 - Latin hypercube vs Sobol vs random sampling: which would you use to plan simulations?
-  - Answer: [Design of experiments and active learning](answers/design-of-experiments-and-active-learning.md), [Latin hypercube sampling](https://en.wikipedia.org/wiki/Latin_hypercube_sampling) and [Sobol sequence](https://en.wikipedia.org/wiki/Sobol_sequence)
+  - Answer: [Latin hypercube vs Sobol vs random sampling](answers/design-of-experiments-and-active-learning.md#latin-hypercube-vs-sobol-vs-random-sampling)
 - How many simulations do you need to train a surrogate?
-  - Answer: [Design of experiments and active learning](answers/design-of-experiments-and-active-learning.md) and [Surrogate models](answers/surrogate-models.md)
+  - Answer: [How many simulations you need](answers/design-of-experiments-and-active-learning.md#how-many-simulations-you-need)
 - What is active learning for simulations, and which acquisition function would you use?
-  - Answer: [Design of experiments and active learning](answers/design-of-experiments-and-active-learning.md) and [A Tutorial on Bayesian Optimization](https://arxiv.org/abs/1807.02811)
+  - Answer: [Active learning and acquisition functions](answers/design-of-experiments-and-active-learning.md#active-learning-and-acquisition-functions)
 - What is global sensitivity analysis (Sobol indices), and how does it guide simplifying a design space?
-  - Answer: [Design of experiments and active learning](answers/design-of-experiments-and-active-learning.md)
+  - Answer: [Global sensitivity analysis and Sobol indices](answers/design-of-experiments-and-active-learning.md#global-sensitivity-analysis-and-sobol-indices)
 - How do you combine many cheap low-fidelity simulations with a few expensive high-fidelity ones?
-  - Answer: [Multi-fidelity learning](answers/multi-fidelity-learning.md) and [A composite neural network that learns from multi-fidelity data](https://arxiv.org/abs/1903.00104)
+  - Answer: [Multi-Fidelity Learning](answers/multi-fidelity-learning.md)
 - What are Hamiltonian and Lagrangian neural networks?
-  - Answer: [Hamiltonian Neural Networks](https://arxiv.org/abs/1906.01563), [Lagrangian Neural Networks](https://arxiv.org/abs/2003.04630) and [Hard vs soft constraints](answers/hard-vs-soft-constraints.md)
+  - Answer: [Hamiltonian and Lagrangian Neural Networks](answers/hamiltonian-and-lagrangian-neural-networks.md)
 - A good book covering this whole area?
-  - Answer: [Data-Driven Science and Engineering (Brunton & Kutz)](http://databookuw.com/)
+  - Answer: [Books (free online)](resources.md#books-free-online)
 
 ## Time-Dependent Problems and Autoregressive Rollouts
 
 - Why does a model trained for one-step prediction drift when you roll it out for many steps?
-  - Answer: [Autoregressive rollouts](answers/autoregressive-rollouts.md)
+  - Answer: [Why one-step models drift](answers/autoregressive-rollouts.md#why-one-step-models-drift)
 - Why does injecting noise into training inputs help rollouts?
-  - Answer: [Autoregressive rollouts](answers/autoregressive-rollouts.md), [Learning to Simulate Complex Physics with Graph Networks](https://arxiv.org/abs/2002.09405) and [MeshGraphNets](https://arxiv.org/abs/2010.03409)
+  - Answer: [Noise injection](answers/autoregressive-rollouts.md#noise-injection)
 - What is the pushforward trick?
-  - Answer: [Message Passing Neural PDE Solvers](https://arxiv.org/abs/2202.03376) and [Autoregressive rollouts](answers/autoregressive-rollouts.md)
+  - Answer: [The pushforward trick](answers/autoregressive-rollouts.md#the-pushforward-trick)
 - What is unrolled training, and what is "solver-in-the-loop"?
-  - Answer: [Solver-in-the-Loop](https://arxiv.org/abs/2007.00016) and [Differentiable physics and hybrid solvers](answers/differentiable-physics-and-hybrid-solvers.md)
+  - Answer: [Unrolled training and solver-in-the-loop](answers/differentiable-physics-and-hybrid-solvers.md#unrolled-training-and-solver-in-the-loop)
 - Why do long rollouts lose small-scale (high-frequency) detail, and how does PDE-Refiner address it?
-  - Answer: [PDE-Refiner](https://arxiv.org/abs/2308.05732) and [Autoregressive rollouts](answers/autoregressive-rollouts.md)
+  - Answer: [Losing small scales and PDE-Refiner](answers/autoregressive-rollouts.md#losing-small-scales-and-pde-refiner)
 - How do you evaluate a rollout: error vs time, correlation time, energy spectrum?
-  - Answer: [Autoregressive rollouts](answers/autoregressive-rollouts.md) and [Evaluation metrics](answers/evaluation-metrics.md)
+  - Answer: [Evaluating a rollout](answers/autoregressive-rollouts.md#evaluating-a-rollout)
 - What is time-bundling, and how do you choose the model's time step?
-  - Answer: [Message Passing Neural PDE Solvers](https://arxiv.org/abs/2202.03376) and [Autoregressive rollouts](answers/autoregressive-rollouts.md)
+  - Answer: [Time-bundling and choosing the time step](answers/autoregressive-rollouts.md#time-bundling-and-choosing-the-time-step)
 - What are neural ODEs?
-  - Answer: [Neural Ordinary Differential Equations](https://arxiv.org/abs/1806.07366), [Diffrax](https://github.com/patrick-kidger/diffrax) and [ETH Zürich AISE: Neural Differential Equations](https://www.youtube.com/watch?v=jnjYsm4NjhE)
+  - Answer: [Neural ODEs](answers/neural-odes.md)
 - How can machine learning correct a coarse-grid solver instead of replacing it?
-  - Answer: [Machine learning accelerated computational fluid dynamics](https://arxiv.org/abs/2102.01010), [Learned Coarse Models for Efficient Turbulence Simulation](https://arxiv.org/abs/2112.15275) and [Differentiable physics and hybrid solvers](answers/differentiable-physics-and-hybrid-solvers.md)
+  - Answer: [Correcting a coarse solver](answers/differentiable-physics-and-hybrid-solvers.md#correcting-a-coarse-solver)
 - For a chaotic flow, what can a surrogate realistically predict?
-  - Answer: [Autoregressive rollouts](answers/autoregressive-rollouts.md)
+  - Answer: [What a surrogate can predict for a chaotic flow](answers/autoregressive-rollouts.md#what-a-surrogate-can-predict-for-a-chaotic-flow)
 - How do you detect that a rollout is about to blow up?
-  - Answer: [Autoregressive rollouts](answers/autoregressive-rollouts.md)
+  - Answer: [Detecting a rollout that is about to blow up](answers/autoregressive-rollouts.md#detecting-a-rollout-that-is-about-to-blow-up)
 - Which benchmarks test time-dependent neural PDE solvers?
-  - Answer: [PDEArena: Towards Multi-spatiotemporal-scale Generalized PDE Modeling](https://arxiv.org/abs/2209.15616), [PDEBench](https://arxiv.org/abs/2210.07182) and [The Well](https://arxiv.org/abs/2412.00568)
+  - Answer: [Benchmarks for time-dependent neural PDE solvers](answers/public-simulation-datasets.md#benchmarks-for-time-dependent-neural-pde-solvers)
 
 ## Uncertainty, Generalization and Out-of-Distribution Detection
 
 - Aleatoric vs epistemic uncertainty: which dominates in a simulation surrogate?
-  - Answer: [Uncertainty quantification](answers/uncertainty-quantification.md)
+  - Answer: [Aleatoric vs epistemic uncertainty](answers/uncertainty-quantification.md#aleatoric-vs-epistemic-uncertainty)
 - How do deep ensembles estimate uncertainty?
-  - Answer: [Deep Ensembles](https://arxiv.org/abs/1612.01474) and [Uncertainty quantification](answers/uncertainty-quantification.md)
+  - Answer: [Deep ensembles](answers/uncertainty-quantification.md#deep-ensembles)
 - What is Monte Carlo dropout, and why is it often overconfident?
-  - Answer: [Dropout as a Bayesian Approximation](https://arxiv.org/abs/1506.02142) and [Uncertainty quantification](answers/uncertainty-quantification.md)
+  - Answer: [Monte Carlo dropout](answers/uncertainty-quantification.md#monte-carlo-dropout)
 - What is conformal prediction? What does its coverage guarantee assume?
-  - Answer: [A Gentle Introduction to Conformal Prediction](https://arxiv.org/abs/2107.07511), [Conformal prediction](https://en.wikipedia.org/wiki/Conformal_prediction) and [MAPIE](https://github.com/scikit-learn-contrib/MAPIE)
+  - Answer: [Conformal Prediction](answers/conformal-prediction.md)
 - How do you check that uncertainty estimates are calibrated?
-  - Answer: [Uncertainty quantification](answers/uncertainty-quantification.md)
+  - Answer: [Checking calibration](answers/uncertainty-quantification.md#checking-calibration)
 - Which UQ methods are used in scientific machine learning, and how are they compared?
-  - Answer: [Uncertainty Quantification in Scientific Machine Learning: Methods, Metrics, and Comparisons](https://arxiv.org/abs/2201.07766) and [A Review of Uncertainty Quantification in Deep Learning](https://arxiv.org/abs/2011.06225)
+  - Answer: [UQ methods in scientific ML and how they are compared](answers/uncertainty-quantification.md#uq-methods-in-scientific-ml-and-how-they-are-compared)
 - What does "out of distribution" mean for a geometry, and how would you detect it?
-  - Answer: [Out-of-distribution detection and generalization](answers/out-of-distribution-and-generalization.md), [A Baseline for Detecting Misclassified and Out-of-Distribution Examples](https://arxiv.org/abs/1610.02136) and [Mahalanobis-distance OOD detection](https://arxiv.org/abs/1807.03888)
+  - Answer: [Detecting an out-of-distribution geometry](answers/out-of-distribution-and-generalization.md#detecting-an-out-of-distribution-geometry)
 - When should the system fall back to running the full solver?
-  - Answer: [Out-of-distribution detection and generalization](answers/out-of-distribution-and-generalization.md) and [Production and deployment](answers/production-and-deployment.md)
+  - Answer: [When to fall back to the full solver](answers/out-of-distribution-and-generalization.md#when-to-fall-back-to-the-full-solver)
 - A model was trained on Reynolds numbers from 1e5 to 1e6. A customer asks for 5e6. What do you say?
-  - Answer: [Out-of-distribution detection and generalization](answers/out-of-distribution-and-generalization.md)
+  - Answer: [Example: trained on Re 1e5 to 1e6, asked for 5e6](answers/out-of-distribution-and-generalization.md#example-trained-on-re-1e5-to-1e6-asked-for-5e6)
 - How do you handle uncertainty when the training data itself comes from high-fidelity simulations with their own errors?
-  - Answer: [Uncertainty quantification](answers/uncertainty-quantification.md) and [Verification, validation and mesh convergence](answers/verification-validation-and-mesh-convergence.md)
+  - Answer: [When the training data has its own errors](answers/uncertainty-quantification.md#when-the-training-data-has-its-own-errors)
 - How does a surrogate's uncertainty carry through to a design decision, such as passing a safety factor?
-  - Answer: [Uncertainty quantification](answers/uncertainty-quantification.md)
+  - Answer: [From uncertainty to a design decision](answers/uncertainty-quantification.md#from-uncertainty-to-a-design-decision)
 - A new design family arrives in production. How do you notice, and what do you do?
-  - Answer: [Production and deployment](answers/production-and-deployment.md) and [Out-of-distribution detection and generalization](answers/out-of-distribution-and-generalization.md)
+  - Answer: [A new design family arrives in production](answers/out-of-distribution-and-generalization.md#a-new-design-family-arrives-in-production)
 
 ## Simulation Data, Datasets and Benchmarks
 
 - How would you generate a training set of 1,000 CFD simulations? Walk through the pipeline.
-  - Answer: [Design of experiments and active learning](answers/design-of-experiments-and-active-learning.md) and [System design framework](answers/system-design-framework.md)
+  - Answer: [Pipeline for 1,000 CFD simulations](answers/generating-simulation-training-data.md#pipeline-for-1000-cfd-simulations)
 - What makes simulation training data "physically meaningful and sufficient" for a use case?
-  - Answer: [Verification, validation and mesh convergence](answers/verification-validation-and-mesh-convergence.md) and [Design of experiments and active learning](answers/design-of-experiments-and-active-learning.md)
+  - Answer: [What makes training data physically meaningful and sufficient](answers/generating-simulation-training-data.md#what-makes-training-data-physically-meaningful-and-sufficient)
 - Which file formats will you meet (STL, OBJ, VTK/VTU, CGNS, HDF5, Zarr, solver input decks), and how do you handle terabytes of them?
-  - Answer: [Mesh data processing](answers/mesh-data-processing.md) and [Scaling to large meshes](answers/scaling-to-large-meshes.md)
+  - Answer: [Simulation File Formats](answers/simulation-file-formats.md)
 - How should you split simulation data into train, validation and test sets?
-  - Answer: [Data splits and leakage](answers/data-splits-and-leakage.md)
+  - Answer: [Splitting simulation data](answers/data-splits-and-leakage.md#splitting-simulation-data)
 - Give three ways information can leak from the test set into training in simulation datasets.
-  - Answer: [Data splits and leakage](answers/data-splits-and-leakage.md)
+  - Answer: [Three ways test information leaks into training](answers/data-splits-and-leakage.md#three-ways-test-information-leaks-into-training)
 - Name public datasets for car aerodynamics, airfoils and structures. What are their licences?
-  - Answer: [Learning resources: datasets](resources.md#datasets-and-benchmarks), [DrivAerNet++](https://arxiv.org/abs/2406.09624), [DrivAerML](https://arxiv.org/abs/2408.11969), [AhmedML](https://arxiv.org/abs/2407.20801), [WindsorML](https://arxiv.org/abs/2407.19320), [AirfRANS](https://arxiv.org/abs/2212.07564), [SHIFT-SUV](https://huggingface.co/datasets/luminary-shift/SUV), [SHIFT-Wing](https://huggingface.co/datasets/luminary-shift/WING) and [SimJEB](https://simjeb.github.io/)
+  - Answer: [Car aerodynamics datasets](answers/public-simulation-datasets.md#car-aerodynamics-datasets)
 - What are PDEBench, The Well, PDEArena, CFDBench and APEBench used for?
-  - Answer: [PDEBench](https://arxiv.org/abs/2210.07182), [The Well](https://arxiv.org/abs/2412.00568), [PDEArena](https://arxiv.org/abs/2209.15616), [CFDBench](https://arxiv.org/abs/2310.05963) and [APEBench](https://github.com/tum-pbs/apebench)
+  - Answer: [PDEBench, The Well, PDEArena, CFDBench and APEBench](answers/public-simulation-datasets.md#pdebench-the-well-pdearena-cfdbench-and-apebench)
 - What did McGreivy & Hakim find about baselines in machine learning for fluid PDEs?
-  - Answer: [Weak baselines and reporting biases lead to overoptimism in ML for fluid-related PDEs](https://arxiv.org/abs/2407.07218) (79% of the papers they reviewed that claimed to beat a standard numerical method compared against a weak baseline) and [ML vs numerical solvers](answers/ml-vs-numerical-solvers.md)
+  - Answer: [Weak baselines and reporting biases](answers/ml-vs-numerical-solvers.md#weak-baselines-and-reporting-biases)
 - The "ground truth" labels have discretization error. How should that change your evaluation?
-  - Answer: [Verification, validation and mesh convergence](answers/verification-validation-and-mesh-convergence.md)
+  - Answer: [When the labels have discretization error](answers/verification-validation-and-mesh-convergence.md#when-the-labels-have-discretization-error)
 - The customer has 40 proprietary simulations. Can you still deliver a useful model?
-  - Answer: [Foundation models for physics](answers/foundation-models-for-physics.md), [Multi-fidelity learning](answers/multi-fidelity-learning.md) and [Gaussian processes](answers/gaussian-processes.md)
+  - Answer: [A customer with 40 simulations](answers/learning-from-small-simulation-datasets.md#a-customer-with-40-simulations)
 - How do you version simulation data together with models?
-  - Answer: [Production and deployment](answers/production-and-deployment.md)
+  - Answer: [Versioning data together with models](answers/production-and-deployment.md#versioning-data-together-with-models)
 
 ## Evaluation and Testing
 
 - Which metrics would you use for field prediction: relative L2, MSE, maximum error?
-  - Answer: [Evaluation metrics](answers/evaluation-metrics.md)
+  - Answer: [Field metrics](answers/evaluation-metrics.md#field-metrics)
 - How do you evaluate integrated quantities such as drag, lift, maximum stress or mass flow?
-  - Answer: [Evaluation metrics](answers/evaluation-metrics.md)
+  - Answer: [Integrated quantities](answers/evaluation-metrics.md#integrated-quantities)
 - How do you report a speed-up fairly?
-  - Answer: [Evaluation metrics](answers/evaluation-metrics.md) and [ML vs numerical solvers](answers/ml-vs-numerical-solvers.md)
+  - Answer: [Reporting a speed-up fairly](answers/evaluation-metrics.md#reporting-a-speed-up-fairly)
 - Which baselines must a neural surrogate beat before anyone should care?
-  - Answer: [Evaluation metrics](answers/evaluation-metrics.md) and [Weak baselines and reporting biases](https://arxiv.org/abs/2407.07218)
+  - Answer: [Baselines to beat](answers/evaluation-metrics.md#baselines-to-beat)
 - What physics-consistency checks would you run on predictions (conservation, divergence, equilibrium, symmetry)?
-  - Answer: [Evaluation metrics](answers/evaluation-metrics.md) and [Hard vs soft constraints](answers/hard-vs-soft-constraints.md)
+  - Answer: [Physics-consistency checks](answers/evaluation-metrics.md#physics-consistency-checks)
 - How many test cases are enough? How do you report variability across seeds and splits?
-  - Answer: [Evaluation metrics](answers/evaluation-metrics.md)
+  - Answer: [How many test cases, and variability across seeds](answers/evaluation-metrics.md#how-many-test-cases-and-variability-across-seeds)
 - The customer will use the surrogate to rank designs, not for absolute values. How does that change evaluation?
-  - Answer: [Evaluation metrics](answers/evaluation-metrics.md)
+  - Answer: [When the surrogate is used for ranking](answers/evaluation-metrics.md#when-the-surrogate-is-used-for-ranking)
 - How do you evaluate generalization to unseen geometries?
-  - Answer: [Data splits and leakage](answers/data-splits-and-leakage.md) and [Out-of-distribution detection and generalization](answers/out-of-distribution-and-generalization.md)
+  - Answer: [Evaluating generalization to unseen geometries](answers/evaluation-metrics.md#evaluating-generalization-to-unseen-geometries)
 - Your model's average error is low, but it fails on the designs the customer cares about. What do you do?
-  - Answer: [Evaluation metrics](answers/evaluation-metrics.md) (slice analysis)
+  - Answer: [Low average error but failures where it matters](answers/evaluation-metrics.md#low-average-error-but-failures-where-it-matters)
 - How would you build a regression test suite for a surrogate?
-  - Answer: [Production and deployment](answers/production-and-deployment.md)
+  - Answer: [A regression test suite for a surrogate](answers/production-and-deployment.md#a-regression-test-suite-for-a-surrogate)
 - Which engineering-specific metrics did recent car-aerodynamics papers report?
-  - Answer: [DoMINO](https://arxiv.org/abs/2501.13350) and [AB-UPT](https://arxiv.org/abs/2502.09692)
+  - Answer: [Engineering metrics in recent car-aerodynamics papers](answers/evaluation-metrics.md#engineering-metrics-in-recent-car-aerodynamics-papers)
 - How would you evaluate an LLM agent that sets up simulations?
-  - Answer: [LLM agents for simulation](answers/llm-agents-for-simulation.md) and [FEABench](https://arxiv.org/abs/2504.06260)
+  - Answer: [How to evaluate a simulation agent](answers/llm-agents-for-simulation.md#how-to-evaluate-a-simulation-agent)
 
 ## Design Optimization, Inverse Problems and Generative Design
 
 - Walk through a surrogate-based optimization loop.
-  - Answer: [Surrogate-based optimization](answers/surrogate-based-optimization.md)
+  - Answer: [The optimization loop](answers/surrogate-based-optimization.md#the-optimization-loop)
 - Gradients through a differentiable surrogate vs the adjoint method: compare.
-  - Answer: [Surrogate-based optimization](answers/surrogate-based-optimization.md) and [The adjoint method](answers/adjoint-method.md)
+  - Answer: [Surrogate gradients vs the adjoint](answers/surrogate-based-optimization.md#surrogate-gradients-vs-the-adjoint)
 - Explain the adjoint method. Why does its cost not grow with the number of design variables?
-  - Answer: [The adjoint method](answers/adjoint-method.md) and [Adjoint state method](https://en.wikipedia.org/wiki/Adjoint_state_method)
+  - Answer: [The Adjoint Method](answers/adjoint-method.md)
 - Explain Bayesian optimization and acquisition functions.
-  - Answer: [A Tutorial on Bayesian Optimization](https://arxiv.org/abs/1807.02811), [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) and [BoTorch](https://github.com/pytorch/botorch)
+  - Answer: [Bayesian Optimization](answers/bayesian-optimization.md)
 - Why can an optimizer "exploit" a surrogate, and how do you prevent it?
-  - Answer: [Surrogate-based optimization](answers/surrogate-based-optimization.md)
+  - Answer: [Why optimizers exploit surrogates](answers/surrogate-based-optimization.md#why-optimizers-exploit-surrogates)
 - Explain topology optimization with SIMP.
-  - Answer: [Topology optimization](answers/topology-optimization.md), [Topology optimization (Wikipedia)](https://en.wikipedia.org/wiki/Topology_optimization) and [Efficient topology optimization in MATLAB using 88 lines of code](https://www.topopt.mek.dtu.dk/apps-and-software/efficient-topology-optimization-in-matlab)
+  - Answer: [SIMP](answers/topology-optimization.md#simp)
 - How has machine learning been used for topology optimization?
-  - Answer: [Neural networks for topology optimization](https://arxiv.org/abs/1709.09578) and [Neural reparameterization improves structural optimization](https://arxiv.org/abs/1909.04240)
+  - Answer: [Machine learning for topology optimization](answers/topology-optimization.md#machine-learning-for-topology-optimization)
 - How do you identify unknown parameters from measurements (an inverse problem), and why does it need regularization?
-  - Answer: [PINNs](answers/pinns.md) and [Physics Informed Deep Learning (Part II)](https://arxiv.org/abs/1711.10566)
+  - Answer: [Inverse Problems and Regularization](answers/inverse-problems-and-regularization.md)
 - How would you build an inverse-design tool: target performance in, geometry out?
-  - Answer: [Generative models for physics](answers/generative-models-for-physics.md) and [Surrogate-based optimization](answers/surrogate-based-optimization.md)
+  - Answer: [Building an inverse-design tool](answers/generative-models-for-physics.md#building-an-inverse-design-tool)
 - How do you handle multiple objectives (for example drag vs downforce vs mass)?
-  - Answer: [Surrogate-based optimization](answers/surrogate-based-optimization.md)
+  - Answer: [Multiple objectives](answers/surrogate-based-optimization.md#multiple-objectives)
 - How do you keep optimized or generated designs manufacturable?
-  - Answer: [Surrogate-based optimization](answers/surrogate-based-optimization.md) and [Topology optimization](answers/topology-optimization.md)
+  - Answer: [Keeping designs manufacturable](answers/surrogate-based-optimization.md#keeping-designs-manufacturable)
 - What are differentiable simulators, and when are they useful?
-  - Answer: [Differentiable physics and hybrid solvers](answers/differentiable-physics-and-hybrid-solvers.md), [JAX-FEM](https://github.com/deepmodeling/jax-fem), [PhiFlow](https://github.com/tum-pbs/PhiFlow) and [JAX-CFD](https://github.com/google/jax-cfd)
+  - Answer: [Differentiable simulators](answers/differentiable-physics-and-hybrid-solvers.md#differentiable-simulators)
 
 ## Generative Models and Foundation Models for Physics
 
 - How do denoising diffusion models work, and why use them for physics?
-  - Answer: [Generative models for physics](answers/generative-models-for-physics.md), [Denoising Diffusion Probabilistic Models](https://arxiv.org/abs/2006.11239) and [ETH Zürich AISE: Introduction to Diffusion Models](https://www.youtube.com/watch?v=Tohlijxz3XQ)
+  - Answer: [Denoising diffusion models](answers/generative-models-for-physics.md#denoising-diffusion-models)
 - What is flow matching?
-  - Answer: [Flow Matching for Generative Modeling](https://arxiv.org/abs/2210.02747)
+  - Answer: [Flow matching](answers/generative-models-for-physics.md#flow-matching)
 - How are diffusion models used for probabilistic forecasting?
-  - Answer: [GenCast](https://arxiv.org/abs/2312.15796)
+  - Answer: [Probabilistic forecasting with diffusion](answers/generative-models-for-physics.md#probabilistic-forecasting-with-diffusion)
 - How can a generative model solve a PDE from partial observations?
-  - Answer: [DiffusionPDE](https://arxiv.org/abs/2406.17763)
+  - Answer: [Solving PDEs from partial observations](answers/generative-models-for-physics.md#solving-pdes-from-partial-observations)
 - What is a foundation model for PDEs, and what has been shown to transfer?
-  - Answer: [Foundation models for physics](answers/foundation-models-for-physics.md), [Multiple Physics Pretraining](https://arxiv.org/abs/2310.02994), [DPOT](https://arxiv.org/abs/2403.03542) and [Poseidon](https://arxiv.org/abs/2405.19101)
+  - Answer: [What a PDE foundation model is and what transfers](answers/foundation-models-for-physics.md#what-a-pde-foundation-model-is-and-what-transfers)
 - What are the "large geometry" or "large engineering" models that companies talk about?
-  - Answer: [Foundation models for physics](answers/foundation-models-for-physics.md), [PhysicsX LGM-Aero](https://www.physicsx.ai/newsroom/introducing-lgm-aero-genai-for-aero-engineering-and-airplane-showcase-application-for-aerostructures), [Luminary SHIFT models](https://luminary.ai/resources/introducing-luminary-shift-models-a-suite-of-physics-ai-foundation-models-to-transform-engineering-design/) and [Emmi AI](https://www.emmi.ai/)
+  - Answer: [Large geometry and large engineering models](answers/foundation-models-for-physics.md#large-geometry-and-large-engineering-models)
 - What does machine-learning weather forecasting tell us about AI for simulation?
-  - Answer: [FourCastNet](https://arxiv.org/abs/2202.11214), [GraphCast](https://arxiv.org/abs/2212.12794), [Aurora](https://arxiv.org/abs/2405.13063) and [Foundation models for physics](answers/foundation-models-for-physics.md)
+  - Answer: [Lessons from ML weather forecasting](answers/foundation-models-for-physics.md#lessons-from-ml-weather-forecasting)
 - How would you fine-tune a pretrained physics model on a customer's small dataset?
-  - Answer: [Foundation models for physics](answers/foundation-models-for-physics.md)
+  - Answer: [Fine-tuning on a small customer dataset](answers/foundation-models-for-physics.md#fine-tuning-on-a-small-customer-dataset)
 - "Data is the moat in physics AI." Do you agree?
-  - Answer: [Foundation models for physics](answers/foundation-models-for-physics.md)
+  - Answer: [Is data the moat?](answers/foundation-models-for-physics.md#is-data-the-moat)
 
 ## LLM Agents for Simulation and CAD
 
 - What can LLM agents do in a CAE workflow today, and where do they fail?
-  - Answer: [LLM agents for simulation](answers/llm-agents-for-simulation.md)
+  - Answer: [What agents can do today and where they fail](answers/llm-agents-for-simulation.md#what-agents-can-do-today-and-where-they-fail)
 - What did FEABench measure, and what did it find?
-  - Answer: [FEABench: Evaluating Language Models on Multiphysics Reasoning Ability](https://arxiv.org/abs/2504.06260)
+  - Answer: [FEABench](answers/simulation-agents-research.md#feabench)
 - How do Foam-Agent, MetaOpenFOAM and OpenFOAMGPT automate CFD?
-  - Answer: [Foam-Agent](https://arxiv.org/abs/2505.04997), [MetaOpenFOAM](https://arxiv.org/abs/2407.21320) and [OpenFOAMGPT](https://arxiv.org/abs/2501.06327)
+  - Answer: [CFD agents: Foam-Agent, MetaOpenFOAM and OpenFOAMGPT](answers/simulation-agents-research.md#cfd-agents-foam-agent-metaopenfoam-and-openfoamgpt)
 - How do agents automate FEA set-up?
-  - Answer: [MooseAgent](https://arxiv.org/abs/2504.08621), [FeaGPT](https://arxiv.org/abs/2510.21993), [CAX-Agent](https://arxiv.org/abs/2605.15218) and [A Constrained Natural-Language Interface for FEniCS](https://arxiv.org/abs/2606.10928)
+  - Answer: [FEA agents](answers/simulation-agents-research.md#fea-agents)
 - Why should the LLM not write solver physics directly?
-  - Answer: [LLM agents for simulation](answers/llm-agents-for-simulation.md)
+  - Answer: [Why the LLM should not write solver physics](answers/llm-agents-for-simulation.md#why-the-llm-should-not-write-solver-physics)
 - How do text-to-CAD systems work?
-  - Answer: [Text2CAD](https://arxiv.org/abs/2409.17106), [Text-to-CadQuery](https://arxiv.org/abs/2505.06507) and [Generating CAD Code with Vision-Language Models](https://arxiv.org/abs/2410.05340)
+  - Answer: [Text-to-CAD](answers/text-to-cad.md)
 - What is the ReAct pattern, and why does it suit tool-driven engineering workflows?
-  - Answer: [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629) and [LLM agents for simulation](answers/llm-agents-for-simulation.md)
+  - Answer: [The ReAct pattern](answers/llm-agents-for-simulation.md#the-react-pattern)
 - How would you evaluate an agent that sets up and runs simulations?
-  - Answer: [LLM agents for simulation](answers/llm-agents-for-simulation.md)
+  - Answer: [How to evaluate a simulation agent](answers/llm-agents-for-simulation.md#how-to-evaluate-a-simulation-agent)
 
 ## ML Engineering, Scaling and Production
 
 - Roughly how much GPU memory does a GNN on a 1-million-node mesh need? Show the arithmetic.
-  - Answer: [Scaling to large meshes](answers/scaling-to-large-meshes.md)
+  - Answer: [GPU memory for a GNN on a 1-million-node mesh](answers/scaling-to-large-meshes.md#gpu-memory-for-a-gnn-on-a-1-million-node-mesh)
 - How can you train on subsampled points but predict at full resolution?
-  - Answer: [Scaling to large meshes](answers/scaling-to-large-meshes.md) and [AB-UPT](https://arxiv.org/abs/2502.09692)
+  - Answer: [Train on subsamples, predict at full resolution](answers/scaling-to-large-meshes.md#train-on-subsamples-predict-at-full-resolution)
 - What are domain decomposition and graph partitioning with halo regions?
-  - Answer: [Scaling to large meshes](answers/scaling-to-large-meshes.md) and [X-MeshGraphNet](https://arxiv.org/abs/2411.17164)
+  - Answer: [Domain decomposition and halo regions](answers/scaling-to-large-meshes.md#domain-decomposition-and-halo-regions)
 - When does mixed precision hurt a physics model?
-  - Answer: [Mixed Precision Training](https://arxiv.org/abs/1710.03740) and [Scaling to large meshes](answers/scaling-to-large-meshes.md)
+  - Answer: [When mixed precision hurts](answers/scaling-to-large-meshes.md#when-mixed-precision-hurts)
 - What is gradient checkpointing?
-  - Answer: [Training Deep Nets with Sublinear Memory Cost](https://arxiv.org/abs/1604.06174)
+  - Answer: [Gradient checkpointing](answers/scaling-to-large-meshes.md#gradient-checkpointing)
 - Data parallel vs model parallel training: when do you need each?
-  - Answer: [Scaling to large meshes](answers/scaling-to-large-meshes.md) and [ZeRO](https://arxiv.org/abs/1910.02054)
+  - Answer: [Data parallel vs model parallel](answers/scaling-to-large-meshes.md#data-parallel-vs-model-parallel)
 - How do you feed terabytes of simulation results to the GPUs without stalling?
-  - Answer: [Scaling to large meshes](answers/scaling-to-large-meshes.md)
+  - Answer: [Feeding terabytes to the GPUs](answers/scaling-to-large-meshes.md#feeding-terabytes-to-the-gpus)
 - When would you use Spark or Dask for simulation data?
-  - Answer: [Scaling to large meshes](answers/scaling-to-large-meshes.md)
+  - Answer: [Spark and Dask](answers/scaling-to-large-meshes.md#spark-and-dask)
 - How would you speed up a Python function that processes a 3D point cloud with millions of points?
-  - Answer: [Mesh data processing](answers/mesh-data-processing.md)
+  - Answer: [Making Python fast on millions of points](answers/mesh-data-processing.md#making-python-fast-on-millions-of-points)
 - ONNX vs TorchScript (or `torch.export`) for deploying a model: trade-offs?
-  - Answer: [Production and deployment](answers/production-and-deployment.md)
+  - Answer: [ONNX vs TorchScript vs torch.export](answers/production-and-deployment.md#onnx-vs-torchscript-vs-torchexport)
 - How do Docker and Kubernetes fit into training and serving surrogates?
-  - Answer: [Production and deployment](answers/production-and-deployment.md)
+  - Answer: [Docker and Kubernetes](answers/production-and-deployment.md#docker-and-kubernetes)
 - How do you track experiments and manage model versions?
-  - Answer: [Production and deployment](answers/production-and-deployment.md)
+  - Answer: [Experiment tracking and model versions](answers/production-and-deployment.md#experiment-tracking-and-model-versions)
 - How do you integrate a surrogate into an engineer's existing CAE workflow?
-  - Answer: [Production and deployment](answers/production-and-deployment.md) and [PhysicsNeMo-CFD](https://github.com/NVIDIA/physicsnemo-cfd)
+  - Answer: [Integrating into an engineer's CAE workflow](answers/production-and-deployment.md#integrating-into-an-engineers-cae-workflow)
 - How do you monitor a deployed surrogate and decide when to retrain?
-  - Answer: [Production and deployment](answers/production-and-deployment.md)
+  - Answer: [Monitoring and retraining](answers/production-and-deployment.md#monitoring-and-retraining)
 - Customers will not upload their CAD to your cloud. What are your options?
-  - Answer: [Production and deployment](answers/production-and-deployment.md)
+  - Answer: [When customers will not upload their CAD](answers/production-and-deployment.md#when-customers-will-not-upload-their-cad)
 
 ## Coding and Practical Implementation
 
 Write these in NumPy or PyTorch without looking anything up. The first two are reported from real interviews (see [industry.md](industry.md)).
 
 - Convert flat vertex and face arrays into a mesh data structure. *(reported in a PhysicsX coding round)*
-  - Answer: [Mesh data processing](answers/mesh-data-processing.md)
+  - Answer: [Flat arrays to a mesh](answers/mesh-data-processing.md#flat-arrays-to-a-mesh)
 - Given a mesh dataset, identify the element types and compute the bounding box. *(reported in a PhysicsX live-coding round)*
-  - Answer: [Mesh data processing](answers/mesh-data-processing.md)
+  - Answer: [Element types and the bounding box](answers/mesh-data-processing.md#element-types-and-the-bounding-box)
 - Compute triangle areas, face normals and area-weighted vertex normals, fully vectorized.
-  - Answer: [Mesh data processing](answers/mesh-data-processing.md)
+  - Answer: [Areas, face normals and vertex normals](answers/mesh-data-processing.md#areas-face-normals-and-vertex-normals)
 - Extract the unique edges and the boundary edges of a triangle mesh.
-  - Answer: [Mesh data processing](answers/mesh-data-processing.md)
+  - Answer: [Unique edges and boundary edges](answers/mesh-data-processing.md#unique-edges-and-boundary-edges)
 - Build vertex adjacency in sparse (CSR) form from a face array.
-  - Answer: [Mesh data processing](answers/mesh-data-processing.md)
+  - Answer: [Vertex adjacency in CSR form](answers/mesh-data-processing.md#vertex-adjacency-in-csr-form)
 - Compute the volume of a closed triangle mesh.
-  - Answer: [Mesh data processing](answers/mesh-data-processing.md) and [Divergence theorem](https://en.wikipedia.org/wiki/Divergence_theorem)
+  - Answer: [Volume of a closed mesh](answers/mesh-data-processing.md#volume-of-a-closed-mesh)
 - Compute the drag force on a body from surface pressure and wall shear stress.
-  - Answer: [Mesh data processing](answers/mesh-data-processing.md) and [CFD essentials](answers/cfd-essentials.md)
+  - Answer: [Drag force from pressure and wall shear](answers/mesh-data-processing.md#drag-force-from-pressure-and-wall-shear)
 - Interpolate a field from one mesh onto another (nearest neighbour, inverse distance, barycentric).
-  - Answer: [Mesh data processing](answers/mesh-data-processing.md)
+  - Answer: [Interpolating fields between meshes](answers/mesh-data-processing.md#interpolating-fields-between-meshes)
 - Build a k-nearest-neighbour or radius graph with a k-d tree.
-  - Answer: [Mesh data processing](answers/mesh-data-processing.md) and [k-d tree](https://en.wikipedia.org/wiki/K-d_tree)
+  - Answer: [k-nearest-neighbour and radius graphs](answers/mesh-data-processing.md#k-nearest-neighbour-and-radius-graphs)
 - Implement farthest point sampling.
-  - Answer: [Point-cloud learning](answers/point-cloud-learning.md)
+  - Answer: [Code: farthest point sampling](answers/point-cloud-learning.md#code-farthest-point-sampling)
 - Implement the per-sample relative L2 error, including the area-weighted version for unstructured meshes.
-  - Answer: [Evaluation metrics](answers/evaluation-metrics.md)
+  - Answer: [Code: per-sample relative L2 error](answers/evaluation-metrics.md#code-per-sample-relative-l2-error)
 - Implement per-channel normalization that uses training-set statistics only.
-  - Answer: [Non-dimensionalization and normalization](answers/nondimensionalization-and-normalization.md)
+  - Answer: [Code: per-channel normalizer](answers/nondimensionalization-and-normalization.md#code-per-channel-normalizer)
 - Implement a 1D finite element solver for the Poisson equation (or an axially loaded bar).
-  - Answer: [The finite element method](answers/finite-element-method.md)
+  - Answer: [Code: 1D FEM for the Poisson equation](answers/finite-element-method.md#code-1d-fem-for-the-poisson-equation)
 - Implement an explicit finite-difference solver for the 1D heat equation and check the stability limit.
-  - Answer: [CFD Python: 12 steps to Navier–Stokes](https://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/) and [FEM vs FVM vs FDM](answers/fem-vs-fvm-vs-fdm.md)
+  - Answer: [Code: explicit heat-equation solver and its stability limit](answers/time-integration-and-stability.md#code-explicit-heat-equation-solver-and-its-stability-limit)
 - Implement a PINN for the 1D Poisson or Burgers equation with PyTorch autograd.
-  - Answer: [PINNs](answers/pinns.md) and the ETH course tutorials ([camlab-ethz/AI_Science_Engineering](https://github.com/camlab-ethz/AI_Science_Engineering))
+  - Answer: [Code: a PINN for the 1D Poisson equation](answers/pinns.md#code-a-pinn-for-the-1d-poisson-equation)
 - Implement a 1D Fourier layer: `rfft`, keep the first k modes, multiply by complex weights, `irfft`.
-  - Answer: [Fourier Neural Operator](answers/fourier-neural-operator.md) and [the original FNO code](https://github.com/zongyi-li/fourier_neural_operator)
+  - Answer: [Code: a 1D Fourier layer](answers/fourier-neural-operator.md#code-a-1d-fourier-layer)
 - Implement one message-passing layer: edge MLP, sum aggregation, node MLP, residual connection.
-  - Answer: [GNNs and MeshGraphNets](answers/gnns-and-meshgraphnets.md)
+  - Answer: [Code: one message-passing layer](answers/gnns-and-meshgraphnets.md#code-one-message-passing-layer)
 - Implement PointNet: a shared per-point MLP followed by max pooling.
-  - Answer: [Point-cloud learning](answers/point-cloud-learning.md)
+  - Answer: [Code: a minimal PointNet](answers/point-cloud-learning.md#code-a-minimal-pointnet)
 - Implement an autoregressive rollout loop with training-time noise injection.
-  - Answer: [Autoregressive rollouts](answers/autoregressive-rollouts.md)
+  - Answer: [Code: rollout with noise injection](answers/autoregressive-rollouts.md#code-rollout-with-noise-injection)
 - Implement Gaussian process regression from scratch (RBF kernel, Cholesky solve, predictive variance).
-  - Answer: [Gaussian processes](answers/gaussian-processes.md)
+  - Answer: [Code: GP regression from scratch](answers/gaussian-processes.md#code-gp-regression-from-scratch)
 - Compute POD modes from a snapshot matrix with the SVD.
-  - Answer: [Reduced-order models](answers/reduced-order-models.md)
+  - Answer: [Code: POD with the SVD](answers/reduced-order-models.md#code-pod-with-the-svd)
 - Implement Latin hypercube sampling.
-  - Answer: [Design of experiments and active learning](answers/design-of-experiments-and-active-learning.md)
+  - Answer: [Code: Latin hypercube sampling](answers/design-of-experiments-and-active-learning.md#code-latin-hypercube-sampling)
 - Implement split conformal prediction intervals for a regression model.
-  - Answer: [Uncertainty quantification](answers/uncertainty-quantification.md)
+  - Answer: [Code: split conformal intervals](answers/conformal-prediction.md#code-split-conformal-intervals)
 - General algorithm questions also appear (three problems on Coderbyte or CoderPad are reported). Practise standard data-structure problems.
-  - Answer: [Machine-Learning-Interviews](https://github.com/alirezadir/Machine-Learning-Interviews) and [PhysicsX interview guide (Dataford)](https://dataford.io/interview-guides/physicsx/machine-learning-engineer)
+  - Answer: [Coding Round Preparation](answers/coding-round-preparation.md)
 - Read a VTK or STL file, attach a field, and save it for ParaView.
-  - Answer: [meshio](https://github.com/nschloe/meshio), [PyVista](https://github.com/pyvista/pyvista) and [Mesh data processing](answers/mesh-data-processing.md)
+  - Answer: [Code: read a mesh, attach a field, save for ParaView](answers/simulation-file-formats.md#code-read-a-mesh-attach-a-field-save-for-paraview)
 
 ## AI-for-Simulation System Design
 
 Answer every question with the same structure: [System design framework](answers/system-design-framework.md).
 
 - Design a system that predicts drag and surface pressure for a new car shape in seconds, from its STL.
-  - Answer: [System design framework](answers/system-design-framework.md) (worked example), [DrivAerML](https://arxiv.org/abs/2408.11969), [AB-UPT](https://arxiv.org/abs/2502.09692) and [DoMINO](https://arxiv.org/abs/2501.13350)
+  - Answer: [Design: Car Aerodynamics Surrogate](answers/design-car-aerodynamics-surrogate.md)
 - Design a platform where engineers upload CAD and get stress predictions with a confidence level.
-  - Answer: [System design framework](answers/system-design-framework.md), [Uncertainty quantification](answers/uncertainty-quantification.md) and [Out-of-distribution detection and generalization](answers/out-of-distribution-and-generalization.md)
+  - Answer: [Design: Stress Prediction Platform](answers/design-stress-prediction-platform.md)
 - Design the pipeline that generates and stores 10,000 CFD simulations for training.
-  - Answer: [Design of experiments and active learning](answers/design-of-experiments-and-active-learning.md) and [Scaling to large meshes](answers/scaling-to-large-meshes.md)
+  - Answer: [Design: Simulation Data Pipeline](answers/design-simulation-data-pipeline.md)
 - Design an active learning loop that decides which simulation to run next.
-  - Answer: [Design of experiments and active learning](answers/design-of-experiments-and-active-learning.md) and [A Tutorial on Bayesian Optimization](https://arxiv.org/abs/1807.02811)
+  - Answer: [Design: Active Learning Loop](answers/design-active-learning-loop.md)
 - Design a lightweighting loop for a structural bracket that never ships an unverified design.
-  - Answer: [Surrogate-based optimization](answers/surrogate-based-optimization.md) and [SimJEB](https://simjeb.github.io/)
+  - Answer: [Design: Bracket Lightweighting Loop](answers/design-bracket-lightweighting-loop.md)
 - Design a validation strategy that would convince a sceptical customer to trust your surrogate.
-  - Answer: [Verification, validation and mesh convergence](answers/verification-validation-and-mesh-convergence.md) and [Evaluation metrics](answers/evaluation-metrics.md)
+  - Answer: [Design: Validation Strategy](answers/design-validation-strategy.md)
 - Design a real-time digital twin of a heat exchanger that combines sensor data with simulation.
-  - Answer: [System design framework](answers/system-design-framework.md) and [Multi-fidelity learning](answers/multi-fidelity-learning.md)
+  - Answer: [Design: Heat Exchanger Digital Twin](answers/design-heat-exchanger-digital-twin.md)
 - Design a crash-simulation surrogate for a vehicle programme.
-  - Answer: [System design framework](answers/system-design-framework.md), [Autoregressive rollouts](answers/autoregressive-rollouts.md) and [High-Fidelity Industrial Crash Dynamics Prediction](https://arxiv.org/abs/2605.27758)
+  - Answer: [System design: a crash surrogate for a vehicle programme](answers/crash-simulation-surrogates.md#system-design-a-crash-surrogate-for-a-vehicle-programme)
 - Design a thermal surrogate for a battery pack or an electronics enclosure.
-  - Answer: [System design framework](answers/system-design-framework.md)
+  - Answer: [Design: Thermal Surrogate](answers/design-thermal-surrogate.md)
 - Design a surrogate that combines plenty of RANS data with a little LES data.
-  - Answer: [Multi-fidelity learning](answers/multi-fidelity-learning.md)
+  - Answer: [Design: RANS–LES Multi-Fidelity Surrogate](answers/design-rans-les-multi-fidelity-surrogate.md)
 - Design a pipeline that fine-tunes a pretrained physics model on a customer's 50 simulations.
-  - Answer: [Foundation models for physics](answers/foundation-models-for-physics.md)
+  - Answer: [Design: Fine-Tuning Pipeline](answers/design-fine-tuning-pipeline.md)
 - Design an inverse-design tool: a target pressure distribution in, a geometry out.
-  - Answer: [Generative models for physics](answers/generative-models-for-physics.md) and [Surrogate-based optimization](answers/surrogate-based-optimization.md)
+  - Answer: [Design: Inverse Design Tool](answers/design-inverse-design-tool.md)
 - Design an LLM agent that runs a structural check from a plain-language request.
-  - Answer: [LLM agents for simulation](answers/llm-agents-for-simulation.md)
+  - Answer: [Design: LLM Structural Check Agent](answers/design-llm-structural-check-agent.md)
 - Design a serving system for 1,000 engineers using a surrogate interactively.
-  - Answer: [Production and deployment](answers/production-and-deployment.md)
+  - Answer: [Design: Surrogate Serving System](answers/design-surrogate-serving-system.md)
 - Design monitoring that detects when incoming designs drift outside the training data.
-  - Answer: [Out-of-distribution detection and generalization](answers/out-of-distribution-and-generalization.md) and [Production and deployment](answers/production-and-deployment.md)
+  - Answer: [Design: Drift Monitoring](answers/design-drift-monitoring.md)
 
 ## Behavioral and Customer-Facing Scenarios
 
-All of these are covered in [Behavioral and customer scenarios](answers/behavioral-and-customer-scenarios.md).
+Customer scenarios are covered in [Customer scenarios](answers/customer-scenarios.md) and stories about your own work in [Behavioural questions](answers/behavioral-questions.md).
 
 - A customer's simulation engineer says: "I don't trust black boxes." How do you respond?
+  - Answer: [I don't trust black boxes](answers/customer-scenarios.md#i-dont-trust-black-boxes)
 - Your surrogate disagrees with wind-tunnel data. What do you do?
+  - Answer: [The surrogate disagrees with wind-tunnel data](answers/customer-scenarios.md#the-surrogate-disagrees-with-wind-tunnel-data)
 - A customer wants 1% accuracy from 30 simulations. How do you handle the conversation?
+  - Answer: [1% accuracy from 30 simulations](answers/customer-scenarios.md#1-accuracy-from-30-simulations)
 - One week before delivery, you find the model fails on a design family the customer cares about. What do you do?
+  - Answer: [A failure found one week before delivery](answers/customer-scenarios.md#a-failure-found-one-week-before-delivery)
 - Explain a neural operator to a non-ML engineering manager in two minutes.
+  - Answer: [Explaining a neural operator to a manager](answers/customer-scenarios.md#explaining-a-neural-operator-to-a-manager)
 - Tell me about a time you turned research into something people actually used.
+  - Answer: [Research that people actually used](answers/behavioral-questions.md#research-that-people-actually-used)
 - Tell me about a time you found out your own results were wrong.
+  - Answer: [Finding out your own results were wrong](answers/behavioral-questions.md#finding-out-your-own-results-were-wrong)
 - How do you choose between a quick proof of concept and a robust product feature?
+  - Answer: [Proof of concept or robust feature](answers/customer-scenarios.md#proof-of-concept-or-robust-feature)
 - How do you scope a project with a new customer in the first meeting?
+  - Answer: [Scoping a project in the first meeting](answers/customer-scenarios.md#scoping-a-project-in-the-first-meeting)
 - You disagree with a domain expert about the physics. How do you resolve it?
+  - Answer: [Disagreeing with a domain expert](answers/customer-scenarios.md#disagreeing-with-a-domain-expert)
 - When would you tell a customer that machine learning is the wrong tool?
+  - Answer: [When ML is the wrong tool](answers/customer-scenarios.md#when-ml-is-the-wrong-tool)
 - Present a technical project you have worked on. *(reported as a final-round format)*
+  - Answer: [Presenting a technical project](answers/behavioral-questions.md#presenting-a-technical-project)
 - Why this company, and why AI for simulation?
+  - Answer: [Why this company, and why AI for simulation](answers/behavioral-questions.md#why-this-company-and-why-ai-for-simulation)
 - How do you keep up with a field that moves this fast?
+  - Answer: [Keeping up with the field](answers/behavioral-questions.md#keeping-up-with-the-field)
 
 ## Know the Industry
 
 - What do PhysicsX, Neural Concept, Luminary, Emmi AI, Monolith, Navier AI and BeyondMath do, and how do they differ?
-  - Answer: [Industry and interview notes](industry.md)
+  - Answer: [Companies](industry.md#companies)
 - What is Ansys SimAI?
-  - Answer: [Ansys SimAI](https://www.ansys.com/products/simai), [PySimAI documentation](https://simai.docs.pyansys.com) and [Explaining SimAI](https://ansys.synopsys.com/blog/explaining-simai)
+  - Answer: [Ansys SimAI](industry.md#ansys-simai)
 - What is NVIDIA PhysicsNeMo?
-  - Answer: [NVIDIA PhysicsNeMo](https://developer.nvidia.com/physicsnemo) and [its documentation](https://docs.nvidia.com/physicsnemo/latest/)
+  - Answer: [NVIDIA PhysicsNeMo](industry.md#nvidia-physicsnemo)
 - What changed when Synopsys acquired Ansys and Siemens acquired Altair?
-  - Answer: [Synopsys Completes Acquisition of Ansys (17 July 2025)](https://news.synopsys.com/2025-07-17-Synopsys-Completes-Acquisition-of-Ansys), [Siemens Completes Acquisition of Altair (March 2025)](https://www.digitalengineering247.com/article/siemens-completes-acquisition-of-altair) and [Industry and interview notes](industry.md)
+  - Answer: [Synopsys-Ansys and Siemens-Altair](industry.md#synopsys-ansys-and-siemens-altair)
 - What did PhysicsX release with LGM-Aero and Ai.rplane?
-  - Answer: [Introducing LGM-Aero and Ai.rplane](https://www.physicsx.ai/newsroom/introducing-lgm-aero-genai-for-aero-engineering-and-airplane-showcase-application-for-aerostructures)
+  - Answer: [PhysicsX LGM-Aero and Ai.rplane](industry.md#physicsx-lgm-aero-and-airplane)
 - What are Luminary's SHIFT models and datasets?
-  - Answer: [Introducing Luminary SHIFT Models](https://luminary.ai/resources/introducing-luminary-shift-models-a-suite-of-physics-ai-foundation-models-to-transform-engineering-design/), [SHIFT-Wing](https://luminary.ai/resources/luminary-cloud-releases-shift-wing-a-physics-ai-model-for-transonic-wing-design-in-collaboration-with-otto-aviation-leveraging-nvidia-technologies/) and [Industry and interview notes](industry.md)
+  - Answer: [Luminary SHIFT models and datasets](industry.md#luminary-shift-models-and-datasets)
 - How do physics-AI companies make money: platform licences, services or forward-deployed engineering?
-  - Answer: [Industry and interview notes](industry.md)
+  - Answer: [How physics-AI companies make money](industry.md#how-physics-ai-companies-make-money)
 - Which industries buy these tools, and why do some customers hesitate?
-  - Answer: [Industry and interview notes](industry.md) and [Behavioral and customer scenarios](answers/behavioral-and-customer-scenarios.md)
+  - Answer: [Which industries buy, and why customers hesitate](industry.md#which-industries-buy-and-why-customers-hesitate)
 
 ---
 
 ## How This Guide Was Built
 
 - **Questions** come from job descriptions at AI-for-simulation companies, candidate interview reports, and the standard papers and courses of the field. Reported interview items are marked as such, with sources in [industry.md](industry.md).
-- **Answers** link to the primary source wherever one exists. The pages in [`answers/`](answers/README.md) were written for this guide; each one ends with its references.
+- **Answers** are written for this guide in [`answers/`](answers/README.md). Each question links to the section that answers it; each page starts with a short answer, goes into detail, and ends with "In an interview" (a model answer and likely follow-ups) and its references.
+- **Code** on the answer pages was run before publishing, and the outputs shown are the real outputs. Timings depend on the machine.
 - **Links** were checked when they were added. If one breaks, please open an issue.
 - Company facts (funding, products, acquisitions) are dated. Check them again before an interview.
 
