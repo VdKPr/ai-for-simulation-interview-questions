@@ -34,6 +34,38 @@ Based on job descriptions and candidate reports (sources in [industry.md](indust
 5. Use the [system design framework](answers/system-design-framework.md) for every design question.
 6. Prepare your own stories for the [behavioral questions](#behavioral-and-customer-facing-scenarios). These interviews reward people who can say when a model should *not* be trusted.
 
+## Reading order for simulation-ai
+Tier 1 — Read first (core, non-negotiable):
+
+Simulation Fundamentals: PDEs and Numerical Methods
+Structural Mechanics (FEA)
+Machine Learning Fundamentals for Physical Data
+Physics-Informed Neural Networks (PINNs)
+Graph Neural Networks and Mesh-Based Learning
+Know the Industry
+
+Tier 2 — Read next (high ROI, differentiators):
+7. Surrogate Models, Reduced-Order Models and Design of Experiments
+8. Neural Operators
+9. Evaluation and Testing
+10. Uncertainty, Generalization and Out-of-Distribution Detection
+11. Behavioral and Customer-Facing Scenarios
+
+Tier 3 — Skim before interviews (good to know):
+12. AI-for-Simulation System Design
+13. ML Engineering, Scaling and Production
+14. Heat Transfer and Multiphysics
+15. Time-Dependent Problems and Autoregressive Rollouts
+16. Design Optimization, Inverse Problems and Generative Design
+
+Tier 4 — Lowest priority (read if time permits):
+17. CFD
+18. Simulation Data, Datasets and Benchmarks
+19. 3D Geometry and Geometric Deep Learning
+20. Transformers for Physics and Large-Scale Surrogates
+21. Coding and Practical Implementation
+22. Generative Models and Foundation Models for Physics
+23. LLM Agents for Simulation and CAD
 ## Table of Contents
 
 - [Must Know](#must-know)
