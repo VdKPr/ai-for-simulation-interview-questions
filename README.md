@@ -37,12 +37,12 @@ Based on job descriptions and candidate reports (sources in [industry.md](indust
 ## Reading order for simulation-ai
 Tier 1 — Read first (core, non-negotiable):
 
-Simulation Fundamentals: PDEs and Numerical Methods
-Structural Mechanics (FEA)
-Machine Learning Fundamentals for Physical Data
-Physics-Informed Neural Networks (PINNs)
-Graph Neural Networks and Mesh-Based Learning
-Know the Industry
+1. Simulation Fundamentals: PDEs and Numerical Methods
+2. Structural Mechanics (FEA)
+3. Machine Learning Fundamentals for Physical Data
+4. Physics-Informed Neural Networks (PINNs)
+5. Graph Neural Networks and Mesh-Based Learning
+6. Know the Industry
 
 Tier 2 — Read next (high ROI, differentiators):
 7. Surrogate Models, Reduced-Order Models and Design of Experiments
